@@ -8,12 +8,18 @@
 <meta property="og:description" content="The one that remembers. Brand + screen designs.">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { overflow-x:hidden; }
   body { font-family:-apple-system,'Helvetica Neue',sans-serif; background:#17181c; color:#e8e6df; }
-  .wrap { max-width:1060px; margin:0 auto; padding:56px 5vw 90px; }
+  .wrap { max-width:1060px; margin:0 auto; padding:56px 24px 90px; }
+  .logorow { margin-top:34px; }
+  .brandcard { background:#f7f6f3; border-radius:16px; padding:52px 20px 46px; text-align:center; }
+  .bc-word { font-size:24px; font-weight:700; letter-spacing:.32em; text-indent:.32em; color:#1c1e22; }
+  .bc-rule { margin:22px auto 0; width:70%; height:5px; background:#d2d2d0; border-radius:3px; position:relative; overflow:hidden; }
+  .bc-rule span { position:absolute; left:0; top:0; bottom:0; width:18%; background:#d4a017; }
+  .bc-tag { margin-top:20px; font-size:14px; color:#5a5c60; }
   header { text-align:center; padding: 34px 0 10px; }
   .brand { font-size:30px; font-weight:700; letter-spacing:.42em; text-indent:.42em; }
   .sub { margin-top:10px; font-size:14px; letter-spacing:.18em; text-indent:.18em; color:#8a8d96; }
-  .logoimg { width:min(88%,560px); margin:34px auto 0; display:block; border-radius:16px; }
   h2 { margin:64px 0 6px; font-size:15px; font-weight:700; letter-spacing:.24em; color:#c9a94f; }
   .note { color:#8a8d96; font-size:14.5px; line-height:1.55; margin-bottom:22px; }
   .screens { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px; }
@@ -28,7 +34,11 @@
     <div class="brand">OPERATOR</div>
     <div class="sub">THE ONE THAT REMEMBERS</div>
   </header>
-  <img class="logoimg" src="logo.png" alt="Operator — the one that remembers.">
+  <div class="logorow"><div class="brandcard">
+    <div class="bc-word">O P E R A T O R</div>
+    <div class="bc-rule"><span></span></div>
+    <div class="bc-tag">The one that remembers.</div>
+  </div></div>
   <div class="cap">Brand mark — The Ledger</div>
 
   <h2>THE SCREENS</h2>

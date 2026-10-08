@@ -54,17 +54,21 @@
   .head .sub{margin-top:5px; font-size:15.5px; color:var(--muted); letter-spacing:.1px;}
   .head .sub b{color:#3CB371; font-weight:600;}
   .lockchip{
-    position:absolute; right:34px; top:12px;
-    display:flex; align-items:center; gap:8px;
-    background:rgba(255,199,0,.16); border:1.5px solid rgba(224,168,0,.5);
-    color:#8A6D00; font-size:13px; font-weight:700; letter-spacing:.3px;
-    padding:9px 15px; border-radius:999px; cursor:pointer; user-select:none;
+    position:absolute; right:34px; top:14px;
+    display:flex; align-items:center; gap:7px;
+    background:rgba(10,10,10,.045); border:1px solid rgba(10,10,10,.1);
+    color:#9A9AA0; font-size:11px; font-weight:700; letter-spacing:.8px;
+    padding:7px 13px; border-radius:999px; cursor:pointer; user-select:none;
   }
-  .lockchip:hover{background:rgba(255,199,0,.28);}
+  .lockchip:hover{background:rgba(10,10,10,.08);}
   .lockchip.server{background:rgba(10,10,10,.9); border-color:rgba(10,10,10,.9); color:var(--amber);}
   .lockchip .ico{position:relative; width:13px; height:15px; flex:0 0 13px;}
   .lockchip .ico i{position:absolute; left:1.5px; bottom:0; width:10px; height:8px; background:currentColor; border-radius:2px;}
   .lockchip .ico u{position:absolute; left:2.5px; top:0; width:8px; height:8px; border:2px solid currentColor; border-bottom:none; border-radius:5px 5px 0 0;}
+
+  .back{position:absolute; left:34px; top:-24px; font-size:13.5px; font-weight:600; color:var(--muted); letter-spacing:.2px;}
+  .grp{display:flex; flex-direction:column; align-items:flex-end; gap:6px;}
+  .grp .stamp{margin-top:-2px;}
 
   /* ---------- thread ---------- */
   .thread{
@@ -189,10 +193,6 @@
   .phone.cipher .shot img.photo{filter:blur(10px) brightness(.55) grayscale(1);}
   .phone.cipher .shot .cap{display:none;}
   .phone.cipher .voice{opacity:.85;}
-  .serverbanner{position:absolute; top:186px; left:50%; transform:translateX(-50%); z-index:5; display:none;
-    background:var(--ink); color:var(--amber); font-family:ui-monospace,Menlo,monospace; font-size:11.5px; font-weight:700;
-    letter-spacing:1.2px; padding:8px 18px; border-radius:999px; box-shadow:0 10px 24px rgba(0,0,0,.3);}
-  .phone.cipher .serverbanner{display:block;}
 </style>
 </head>
 <body>
@@ -210,6 +210,7 @@
 
   <!-- header -->
   <div class="head">
+    <div class="back">‹ Chats</div>
     <div class="brand">Operator</div>
     <div class="sub"><b>online</b> · the one that remembers</div>
     <div class="lockchip" id="lockChip" onclick="toggleCipher()">
@@ -217,12 +218,11 @@
     </div>
   </div>
 
-  <div class="serverbanner">SERVER VIEW · CIPHERTEXT ONLY</div>
-
   <!-- thread -->
   <div class="thread" id="thread">
     <div class="daysep">Today</div>
 
+    <div class="grp">
     <div class="msg me" data-raw="Bunnings double-charged me on the March order — here’s the invoice and a shot of the order pad">
       Bunnings double-charged me on the March order — here’s the invoice and a shot of the order pad
       <div class="meta">2:01 pm · delivered ✓✓</div>
@@ -242,6 +242,7 @@
       <div class="cap">ORDER PAD · 3 MAR</div>
     </div>
     <div class="stamp">2:01 pm</div>
+    </div><!-- /grp -->
 
     <div class="voice" data-raw="voice note 0:14">
       <div class="play"><i></i></div>
@@ -275,18 +276,15 @@
         <button class="btn gold" onclick="approveQuote()">Approve &amp; send</button>
       </div>
     </div>
-    <div class="memchip"><div class="m"><i></i><u></u></div>everything lands in the record</div>
   </div>
 
   <!-- input pod -->
   <div class="pod">
     <div class="podrow">
       <div class="chip gal" title="Photos"><i></i><u></u></div>
-      <div class="chip fil" title="Files"><i></i><u></u></div>
       <div class="chip cam" title="Camera"><i></i><u></u></div>
-      <div class="chip pen" title="Note"><i></i><u></u></div>
       <div class="divider"></div>
-      <div class="field" id="field">Drop photos or files…</div>
+      <div class="field" id="field">Type a message…</div>
       <div class="plus" onclick="sendMsg()" title="Send"><i></i><u></u></div>
       <div class="mic" title="Hold to talk"><i></i><u></u><s></s></div>
     </div>
@@ -378,11 +376,13 @@ function viewQuote(){
 
 function sendMsg(){
   const f = document.getElementById('field');
-  if (f.textContent.startsWith('Drop')){
+  if (f.textContent.startsWith('Type')){
     addMsg('Chase that credit note if nothing back by Friday.', true);
     agentReply('Diared. If no credit lands by Friday 9am I chase the trade desk myself and put the answer on your brief.', '2:05 pm');
   }
 }
+
+thread.scrollTop = thread.scrollHeight; // ponytail: land on the latest, the payoff screen
 
 /* render states: #drop = the evidence, #decision = the loop, #cipher = server view */
 (function(){

@@ -27,6 +27,8 @@
   .phone{
     position:relative; width:560px; height:1120px;
     background:var(--paper); overflow:hidden;
+    --me-bg:#0A0A0A; --me-fg:#fff; --me-meta:rgba(255,255,255,.55);
+    --field-bg:#F5F5F7; --chip-bg:#F0F0F3;
   }
 
   /* ---------- phone chrome ---------- */
@@ -84,8 +86,8 @@
   .msg .meta{font-size:11.5px; margin-top:7px; letter-spacing:.3px;}
   .them{align-self:flex-start; background:var(--card); color:var(--ink); border-radius:26px 26px 26px 8px; box-shadow:0 1px 2px rgba(10,10,10,.07), 0 5px 12px rgba(10,10,10,.05);}
   .them .meta{color:var(--muted);}
-  .me{align-self:flex-end; background:var(--ink); color:#fff; border-radius:26px 26px 8px 26px;}
-  .me .meta{color:rgba(255,255,255,.55); text-align:right;}
+  .me{align-self:flex-end; background:var(--me-bg); color:var(--me-fg); border-radius:26px 26px 8px 26px;}
+  .me .meta{color:var(--me-meta); text-align:right;}
   .stamp{align-self:flex-end; font-size:11.5px; color:var(--muted); letter-spacing:.3px; margin-top:-8px;}
   .stamp.left{align-self:flex-start;}
 
@@ -151,7 +153,7 @@
   .pod{position:absolute; left:26px; right:26px; bottom:64px; background:var(--card); border-radius:38px;
     box-shadow:0 18px 44px rgba(10,10,10,.14), inset 0 1px 0 rgba(255,255,255,.9); padding:16px 18px;}
   .podrow{display:flex; gap:12px; align-items:center;}
-  .chip{position:relative; width:46px; height:46px; flex:0 0 46px; border-radius:50%; background:#F0F0F3; cursor:pointer;}
+  .chip{position:relative; width:46px; height:46px; flex:0 0 46px; border-radius:50%; background:var(--chip-bg); cursor:pointer;}
   .chip:hover{background:#E4E4E9;}
   .chip i, .chip u{position:absolute;}
   /* gallery */
@@ -167,11 +169,11 @@
   .chip.pen i{left:13px; top:12px; width:20px; height:20px; background:#6E6E73; clip-path:polygon(20% 80%, 30% 55%, 75% 10%, 90% 25%, 45% 70%);}
   .chip.pen u{left:13px; top:30px; width:22px; height:2.5px; background:#6E6E73; border-radius:2px;}
   .divider{width:1.5px; height:30px; background:var(--line); margin:0 2px;}
-  .field{flex:1; height:46px; display:flex; align-items:center; padding:0 20px; background:#F5F5F7; border-radius:999px;
+  .field{flex:1; height:46px; display:flex; align-items:center; padding:0 20px; background:var(--field-bg); border-radius:999px;
     font-size:15px; color:#B0B0B6; letter-spacing:.1px;}
   .plus{position:relative; width:46px; height:46px; flex:0 0 46px; border-radius:50%; background:var(--ink); cursor:pointer;}
-  .plus i{position:absolute; left:22px; top:13px; width:3px; height:20px; background:#fff; border-radius:2px;}
-  .plus u{position:absolute; left:13px; top:22px; width:20px; height:3px; background:#fff; border-radius:2px;}
+  .plus i{position:absolute; left:22px; top:13px; width:3px; height:20px; background:var(--paper); border-radius:2px;}
+  .plus u{position:absolute; left:13px; top:22px; width:20px; height:3px; background:var(--paper); border-radius:2px;}
   .mic{position:relative; width:58px; height:58px; flex:0 0 58px; border-radius:50%; cursor:pointer;
     background:radial-gradient(120% 120% at 30% 25%, var(--amber-hi) 0%, var(--amber) 55%, var(--amber-lo) 100%);
     box-shadow:0 18px 40px rgba(255,199,0,.5), inset 0 2px 6px rgba(255,255,255,.55), inset 0 -8px 18px rgba(0,0,0,.16);}
@@ -193,6 +195,25 @@
   .phone.cipher .shot img.photo{filter:blur(10px) brightness(.55) grayscale(1);}
   .phone.cipher .shot .cap{display:none;}
   .phone.cipher .voice{opacity:.85;}
+  /* ---------- dark ---------- */
+  .phone.dark{--paper:#0E0E10; --ink:#F2F2F5; --card:#1B1B1F; --line:#33333A; --muted:#8E8E93;
+    --me-bg:#F2F2F5; --me-fg:#0E0E10; --me-meta:rgba(0,0,0,.5); --field-bg:#232327; --chip-bg:#26262B;}
+  .phone.dark .lockchip, .phone.dark .moonchip{background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.14);}
+  .phone.dark .btn.ghost{background:#2B2B31;}
+  .phone.dark .btn.ghost:hover{background:#35353B;}
+  .phone.dark .mic i, .phone.dark .mic s, .phone.dark .mic s::after{background:#0A0A0A;}
+  .phone.dark .mic u{border-color:#0A0A0A;}
+  .phone.dark .homebar{background:rgba(245,245,247,.75);}
+  .phone.dark .att .ficon{background:linear-gradient(180deg,#2A2A2F 0%,#202024 100%);}
+  .moonchip{position:absolute; right:196px; top:14px; width:32px; height:32px; border-radius:50%;
+    background:rgba(10,10,10,.045); border:1px solid rgba(10,10,10,.1); color:#9A9AA0;
+    display:flex; align-items:center; justify-content:center; font-size:15px; cursor:pointer; user-select:none;}
+  .voice.mine{align-self:flex-end; background:var(--me-bg); border-radius:26px 26px 8px 26px;}
+  .voice.mine .vdur{color:var(--me-meta);}
+  .voice.mine .wave b{background:rgba(140,140,145,.45);}
+  .voice.mine .wave b.on{background:var(--me-fg);}
+  .field{color:var(--ink);}
+  .field:empty::before{content:attr(data-ph); color:#B0B0B6;}
 </style>
 </head>
 <body>
@@ -216,6 +237,7 @@
     <div class="lockchip" id="lockChip" onclick="toggleCipher()">
       <div class="ico"><u></u><i></i></div><span id="lockTxt">E2E LOCKED</span>
     </div>
+    <div class="moonchip" onclick="toggleDark()" title="Light / dark">◐</div>
   </div>
 
   <!-- thread -->
@@ -281,12 +303,12 @@
   <!-- input pod -->
   <div class="pod">
     <div class="podrow">
-      <div class="chip gal" title="Photos"><i></i><u></u></div>
-      <div class="chip cam" title="Camera"><i></i><u></u></div>
+      <div class="chip gal" title="Photos" onclick="addShot('PHOTO · 4 MAR')"><i></i><u></u></div>
+      <div class="chip cam" title="Camera" onclick="addShot('CAMERA · NOW')"><i></i><u></u></div>
       <div class="divider"></div>
-      <div class="field" id="field">Type a message…</div>
+      <div class="field" id="field" contenteditable="true" spellcheck="false" data-ph="Type a message…"></div>
       <div class="plus" onclick="sendMsg()" title="Send"><i></i><u></u></div>
-      <div class="mic" title="Hold to talk"><i></i><u></u><s></s></div>
+      <div class="mic" title="Hold to talk" onclick="micTap()"><i></i><u></u><s></s></div>
     </div>
   </div>
 
@@ -374,13 +396,44 @@ function viewQuote(){
   agentReply('Credit note CN-8841 — duplicate line on 18mm edging, $187.45, matched line-for-line against the 3 March statement. PDF attached to the record.', '2:04 pm');
 }
 
+function toggleDark(){ phone.classList.toggle('dark'); }
+
+function addShot(cap){
+  const s = document.createElement('div');
+  s.className = 'shot';
+  s.appendChild(document.getElementById('orderpad').cloneNode(true));
+  const c = document.createElement('div');
+  c.className = 'cap'; c.textContent = cap;
+  s.appendChild(c);
+  thread.appendChild(s);
+  thread.scrollTop = thread.scrollHeight;
+  agentReply('Filed to the job.', '2:05 pm');
+}
+
+function micTap(){
+  const v = document.createElement('div');
+  v.className = 'voice mine';
+  const hs = [10,18,26,34,22,14,20,30,24,12,16,28];
+  let bars = '';
+  hs.forEach((h,i)=>{ bars += '<b class="' + (i < 5 ? 'on' : '') + '" style="height:' + h + 'px"></b>'; });
+  // ponytail: constant markup, no user input
+  v.innerHTML = '<div class="play"><i></i></div><div class="wave">' + bars + '</div><div class="vdur">0:07</div>';
+  thread.appendChild(v);
+  thread.scrollTop = thread.scrollHeight;
+  agentReply('Heard you. Chasing Friday if nothing lands — answer goes on your brief.', '2:05 pm');
+}
+
 function sendMsg(){
   const f = document.getElementById('field');
-  if (f.textContent.startsWith('Type')){
-    addMsg('Chase that credit note if nothing back by Friday.', true);
-    agentReply('Diared. If no credit lands by Friday 9am I chase the trade desk myself and put the answer on your brief.', '2:05 pm');
-  }
+  const text = f.textContent.trim() || 'Chase that credit note if nothing back by Friday.';
+  f.textContent = '';
+  addMsg(text, true);
+  agentReply('Diared. If no credit lands by Friday 9am I chase the trade desk myself and put the answer on your brief.', '2:05 pm');
 }
+
+document.getElementById('field').addEventListener('keydown', e => {
+  if (e.key === 'Enter'){ e.preventDefault(); sendMsg(); }
+});
 
 thread.scrollTop = thread.scrollHeight; // ponytail: land on the latest, the payoff screen
 
@@ -388,6 +441,11 @@ thread.scrollTop = thread.scrollHeight; // ponytail: land on the latest, the pay
 (function(){
   const h = location.hash;
   if (h === '#cipher'){ toggleCipher(); return; }
+  if (h === '#dark'){ toggleDark(); return; }
+  if (h === '#play'){
+    setTimeout(()=>{ sendMsg(); addShot('PHOTO · 4 MAR'); micTap(); approveQuote(); }, 500);
+    return;
+  }
   const hide = sel => document.querySelectorAll(sel).forEach(e=>e.style.display='none');
   if (h === '#drop') hide('#thread .qcard, #thread .memchip');
   if (h === '#decision') hide('#thread .daysep, #thread .msg.me, #thread .att, #thread .shot, #thread .stamp, #thread .voice');

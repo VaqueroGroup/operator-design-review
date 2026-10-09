@@ -3,142 +3,378 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>T-ELOS — Brand Board v2</title>
+<title>T-ELOS — Brand Board v3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{ --ink:#12151C; --ink2:#1B202B; --bone:#F2EDE4; --bronze:#C9975B; --dark-bronze:#8F6B3E;
-    --verdigris:#5E8B7E; --grey:#8A8F9A; --line:#2A3140; }
+  :root{
+    --ink:#12151C; --ink2:#1B202B; --bone:#F2EDE4; --bronze:#C9975B; --dark-bronze:#8F6B3E;
+    --verdigris:#5E8B7E; --grey:#8A8F9A; --line:#2A3140;
+    --hi-yellow:#F5E400; --hi-green:#C6E400;
+  }
   *{box-sizing:border-box; margin:0; padding:0;}
-  body{background:var(--ink); color:var(--bone); font-family:'Inter',sans-serif; padding:44px 40px 70px;}
+  body{background:var(--ink); color:var(--bone); font-family:'Inter',sans-serif; padding:clamp(20px,5vw,44px) clamp(16px,5vw,40px) 70px;}
   .kicker{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.30em; color:var(--bronze); text-transform:uppercase;}
-  h1{font-family:'Archivo',sans-serif; font-weight:800; font-size:44px; letter-spacing:.12em; margin:10px 0 6px; display:flex; align-items:center; gap:0;}
+  h1{margin:10px 0 6px;}
+  h1 svg{display:block; width:100%; max-width:360px; height:auto;}
   .sub{color:var(--grey); max-width:760px; font-size:15px; line-height:1.65;}
   .rule{height:1px; background:var(--line); margin:30px 0;}
   .card{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--ink2); margin-bottom:22px;}
-  .stage{padding:56px 30px; display:flex; align-items:center; justify-content:center; min-height:210px;}
+  .stage{padding:clamp(30px,8vw,56px) clamp(16px,5vw,30px); display:flex; align-items:center; justify-content:center; min-height:210px; flex-wrap:wrap; gap:30px;}
   .stage.bone{background:var(--bone);}
   .stage.black{background:#000;}
   .stage.white{background:#fff;}
+  .stage.hiyellow{background:var(--hi-yellow);}
+  .stage.higreen{background:var(--hi-green);}
   .meta{padding:16px 22px 22px; border-top:1px solid var(--line);}
   .meta h3{font-family:'Archivo',sans-serif; font-size:13px; letter-spacing:.20em; text-transform:uppercase; color:var(--bronze); margin-bottom:8px;}
   .meta p{font-size:13.5px; line-height:1.65; color:#C7CBD4;}
   .meta ul{margin:8px 0 0 18px; font-size:13px; line-height:1.7; color:#C7CBD4;}
   .tag{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em; padding:3px 9px; border:1px solid var(--line); border-radius:20px; color:var(--grey); margin:10px 7px 0 0;}
 
-  /* wordmark with drawn hyphen bar (never a glyph) */
-  .wm{display:inline-flex; align-items:center; letter-spacing:.14em;}
-  .wm .lt{font-family:'Archivo',sans-serif; font-weight:800;}
-  .wm .bar{display:inline-flex; align-items:center; margin:0 .14em; position:relative; align-self:stretch;}
-  .wm .bar .shaft{width:.30em; height:.105em; background:var(--bronze);}
-  .wm .bar .head{width:.19em; height:.19em; border-radius:50%; background:var(--bronze); margin-left:-.012em;}
+  .lp{fill:none; stroke:currentColor; stroke-width:8; stroke-linecap:butt;}
+  .hp{fill:currentColor; stroke:none;}
+  .arc{fill:none; stroke:currentColor; stroke-width:8; stroke-linecap:butt;}
+  .stop{fill:currentColor; stroke:none;}
 
-  .hero-wm{font-size:64px;}
-  .lockup-wm{font-size:40px;}
-
-  /* icon row */
-  .icons{display:flex; align-items:flex-end; gap:34px; justify-content:center;}
+  .icons{display:flex; align-items:flex-end; gap:clamp(16px,3vw,34px); justify-content:center; flex-wrap:wrap;}
   .icons figure{text-align:center;}
   .icons figcaption{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; color:var(--grey); margin-top:10px;}
-  .ic{background:var(--ink); border:1px solid var(--line); border-radius:12px; padding:6px; display:inline-block;}
+  .ic{background:var(--ink); border:1px solid var(--line); border-radius:12px; padding:6px; display:inline-block; line-height:0;}
 
-  /* palette */
-  .sw{display:flex; gap:14px; margin-top:18px;}
-  .sw div{flex:1; height:86px; border-radius:10px; border:1px solid var(--line); display:flex; align-items:flex-end; padding:9px 11px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; line-height:1.5;}
+  .sw{display:flex; gap:14px; margin-top:18px; flex-wrap:wrap;}
+  .sw div{flex:1; min-width:120px; height:86px; border-radius:10px; border:1px solid var(--line); display:flex; align-items:flex-end; padding:9px 11px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; line-height:1.5;}
   .pair{border:1px solid var(--line); border-radius:14px; padding:26px 28px; background:var(--ink2); margin-bottom:22px;}
   .pair h3{font-family:'Archivo',sans-serif; font-size:13px; letter-spacing:.22em; text-transform:uppercase; color:var(--bronze); margin-bottom:16px;}
   .specimen{margin:6px 0 4px;}
   .sm{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:var(--grey); text-transform:uppercase;}
   .bodyline{font-size:15px; color:#C7CBD4; line-height:1.7; margin-top:10px; max-width:780px;}
   .warn{border-left:3px solid var(--verdigris); padding:4px 0 4px 16px; margin-top:14px;}
-  .open{border:1px dashed var(--dark-bronze); border-radius:14px; padding:22px 26px; background:rgba(143,107,62,.08);}
+  .open{border:1px dashed var(--dark-bronze); border-radius:14px; padding:22px 26px; background:rgba(143,107,62,.08); margin-bottom:22px;}
   .open h3{color:var(--bronze);}
+
+  .hi-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:16px; width:100%;}
+  .hi-cell{border-radius:12px; padding:18px; display:flex; flex-direction:column; align-items:center; gap:14px;}
+  .hi-label{font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.14em; text-transform:uppercase; opacity:.75; text-align:center;}
+  .hi-samples{display:flex; gap:16px; flex-wrap:wrap; justify-content:center;}
+  .hi-sample{display:flex; flex-direction:column; align-items:center; gap:8px;}
+
+  .fallback-list{display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:16px; margin-top:16px;}
+  .fallback-card{border:1px solid var(--line); border-radius:12px; padding:18px; background:rgba(255,255,255,.03);}
+  .fallback-card h4{font-family:'Archivo',sans-serif; color:var(--bone); font-size:18px; letter-spacing:.08em; margin-bottom:6px;}
+  .fallback-card p{font-size:13px; color:var(--grey); line-height:1.6;}
+  .gate-badge{display:inline-flex; align-items:center; gap:8px; border:2px solid var(--verdigris); color:var(--verdigris); font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; padding:6px 12px; border-radius:4px; margin-bottom:12px;}
 </style>
 </head>
 <body>
 
-<div class="kicker">Brand board v2 · decision sheet · 2026-10-09</div>
+<svg style="position:absolute;width:0;height:0;" aria-hidden="true">
+  <defs>
+    <path id="lt-T" class="lp" d="M4,4 L52,4 M28,4 L28,96"/>
+    <path id="lt-E" class="lp" d="M4,4 L44,4 M4,50 L40,50 M4,96 L44,96 M4,4 L4,96"/>
+    <path id="lt-L" class="lp" d="M4,4 L4,96 M4,96 L36,96"/>
+    <path id="lt-O" class="lp" d="M32,4 A28,46 0 1 1 32,96 A28,46 0 1 1 32,4 Z"/>
+    <path id="lt-S" class="lp" d="M4,4 L52,4 M4,4 L4,50 M4,50 L52,50 M52,50 L52,96 M4,96 L52,96"/>
+    <path id="lt-C" class="lp" d="M4,4 L44,4 M4,4 L4,96 M4,96 L44,96"/>
+    <path id="lt-N" class="lp" d="M4,4 L4,96 M4,4 L52,96 M52,4 L52,96"/>
+    <path id="lt-R" class="lp" d="M4,4 L4,96 M4,4 L44,4 M4,50 L40,50 M40,50 L48,96"/>
+    <path id="lt-U" class="lp" d="M4,4 L4,92 M48,4 L48,92 M4,92 L48,92"/>
+    <path id="lt-I" class="lp" d="M4,4 L28,4 M16,4 L16,96 M4,96 L28,96"/>
+    <path id="lt-F" class="lp" d="M4,4 L4,96 M4,4 L44,4 M4,50 L40,50"/>
+    <path id="lt-W" class="lp" d="M4,4 L20,96 M20,96 L36,4 M36,4 L52,96 M52,96 L68,4"/>
+    <path id="lt-A" class="lp" d="M4,96 L28,4 M28,4 L52,96 M14,58 L42,58"/>
+
+    <g id="hyphen-full">
+      <path class="hp" d="M0,46 H20 V54 H0 Z"/>
+      <path class="hp" d="M20,42 A8,8 0 1 1 20,58 A8,8 0 1 1 20,42 Z"/>
+    </g>
+    <path id="hyphen-plain" class="hp" d="M0,46 H20 V54 H0 Z"/>
+
+    <g id="terminus-base">
+      <path class="arc" d="M58.369,13.186 A34,34 0 1 1 29.631,13.186"/>
+      <path class="stop" d="M29.631,6.186 A7,7 0 1 1 29.631,20.186 A7,7 0 1 1 29.631,6.186 Z"/>
+    </g>
+
+    <g id="wordmark-full">
+      <use href="#lt-T" x="0"/>
+      <use href="#hyphen-full" x="62"/>
+      <use href="#lt-E" x="96"/>
+      <use href="#lt-L" x="150"/>
+      <use href="#lt-O" x="196"/>
+      <use href="#lt-S" x="266"/>
+    </g>
+    <g id="wordmark-plain">
+      <use href="#lt-T" x="0"/>
+      <use href="#hyphen-plain" x="62"/>
+      <use href="#lt-E" x="88"/>
+      <use href="#lt-L" x="142"/>
+      <use href="#lt-O" x="188"/>
+      <use href="#lt-S" x="258"/>
+    </g>
+    <g id="lockup-full">
+      <use href="#terminus-base" x="0" y="16"/>
+      <use href="#wordmark-full" x="118" y="10"/>
+    </g>
+    <g id="lockup-plain">
+      <use href="#terminus-base" x="0" y="16"/>
+      <use href="#wordmark-plain" x="118" y="10"/>
+    </g>
+    <g id="lockup-stacked">
+      <use href="#terminus-base" x="126" y="0"/>
+      <use href="#wordmark-full" x="9" y="100"/>
+    </g>
+  </defs>
+</svg>
+
+<div class="kicker">Brand board v3 · decision sheet · 2026-10-09</div>
 <h1>
-  <span class="wm hero-wm"><span class="lt">T</span><span class="bar"><span class="shaft"></span><span class="head"></span></span><span class="lt">ELOS</span></span>
+  <svg width="360" height="110" viewBox="0 0 322 100" aria-label="T-ELOS wordmark">
+    <use href="#wordmark-full" color="#C9975B"/>
+  </svg>
 </h1>
-<p class="sub">v2, per the two heads. <strong>The device carries the trademark now</strong> — the Terminus is the flag, corrected and filing-ready. The nail survives where it belongs: welded into the wordmark as the drawn hyphen, weight-matched to the caps. Kill list from v1 is dead: the Tau and the Full Stop are gone, Space Grotesk is gone, serif pairing is gone.</p>
+<p class="sub">v3, per the Parliament's binding amendments. <strong>The device carries the trademark now</strong> — the Terminus is the flag, corrected to v3. Every filed asset is true outlined path geometry: no <code>&lt;text&gt;</code>, no glyphs, no CSS spans in the artwork. The driven-nail hyphen is rebuilt to its real 2:1 head-to-shaft ratio. The horizontal lockup is canonical; the stacked lockup is a documented alternate. Hi-vis, fallback names, and the filing sheet are now on the board.</p>
 <div class="rule"></div>
 
-<!-- HERO: THE TERMINUS (FIXED) -->
+<!-- TERMINUS v3 -->
 <div class="card">
   <div class="stage">
-    <svg width="240" height="240" viewBox="0 0 88 88" fill="none" aria-label="The Terminus mark">
-      <path d="M 55.63 12.05 A 34 34 0 1 1 32.37 12.05" stroke="#C9975B" stroke-width="8" stroke-linecap="round"/>
-      <circle cx="32.37" cy="12.05" r="7" fill="#C9975B"/>
-    </svg>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:30px;">
+      <svg width="240" height="240" viewBox="0 0 88 88" aria-label="The Terminus mark v3">
+        <use href="#terminus-base" color="#C9975B"/>
+      </svg>
+      <div style="display:flex; gap:40px; align-items:flex-end;">
+        <figure style="text-align:center;">
+          <svg width="16" height="16" viewBox="0 0 16 16" style="display:block; margin:0 auto 8px;">
+            <path d="M11,2.804 A6,6 0 1 1 5,2.804" fill="none" stroke="#C9975B" stroke-width="2.2" stroke-linecap="butt"/>
+            <path d="M5,0.879 A1.925,1.925 0 1 1 5,4.729 A1.925,1.925 0 1 1 5,0.879 Z" fill="#C9975B"/>
+          </svg>
+          <figcaption class="icons figcaption" style="margin-top:0;">Terminus v3 @16px</figcaption>
+        </figure>
+        <figure style="text-align:center;">
+          <svg width="16" height="16" viewBox="0 0 16 16" style="display:block; margin:0 auto 8px;">
+            <path d="M11,2.804 A6,6 0 1 1 5,2.804" fill="none" stroke="#8A8F9A" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+          <figcaption class="icons figcaption" style="margin-top:0;">Generic spinner glyph @16px</figcaption>
+        </figure>
+      </div>
+    </div>
   </div>
   <div class="meta">
-    <h3>01 · The Terminus — the trademark mark (primary)</h3>
-    <p>A line that nearly circles its purpose — then <strong>stops dead in a full stop</strong>. τέλος: the final end of a process. Both review fixes are in:</p>
+    <h3>01 · The Terminus v3 — the trademark mark</h3>
+    <p>A line that nearly circles its purpose — then <strong>stops dead in a full stop</strong>. τέλος: the final end of a process. v3 geometry corrections:</p>
     <ul>
-      <li><strong>Terminal at the END of the stroke</strong> (v1 had it at the start — backwards).</li>
-      <li><strong>Sweep 320°</strong>, single short gap at top — not the old 229° "C for spinner".</li>
-      <li><strong>Terminal 1.75× stroke weight</strong> — reads as a full stop, not a rounded cap.</li>
-      <li>Geometry inside the viewBox — the v1 clipping is gone.</li>
+      <li><strong>Sweep reduced to 310°</strong> — gap widened to 50° (was 40°) so the 16px square does not close up.</li>
+      <li><strong>Start is square-cut</strong> — a flat cut end, the passive side of the nail logic.</li>
+      <li><strong>End is the driven stop</strong> — a 1.75× stroke-weight full stop, unchanged.</li>
+      <li>All geometry is path-only; no round cap on the start, no glyph, no spinner ambiguity.</li>
     </ul>
-    <span class="tag">device mark</span><span class="tag">separable — files alone AND composite</span><span class="tag">1.75× terminal</span>
+    <span class="tag">device mark</span><span class="tag">separable — files alone AND composite</span><span class="tag">310° / 50° / 1.75×</span>
   </div>
 </div>
 
 <!-- LOCKUP -->
 <div class="card">
   <div class="stage bone">
-    <div style="display:flex; align-items:center; gap:34px;">
-      <svg width="110" height="110" viewBox="0 0 88 88" fill="none">
-        <path d="M 55.63 12.05 A 34 34 0 1 1 32.37 12.05" stroke="#8F6B3E" stroke-width="8" stroke-linecap="round"/>
-        <circle cx="32.37" cy="12.05" r="7" fill="#8F6B3E"/>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:24px;">
+      <svg width="420" height="120" viewBox="0 0 450 120" aria-label="T-ELOS horizontal lockup">
+        <use href="#lockup-full" color="#8F6B3E"/>
       </svg>
-      <div class="wm lockup-wm" style="color:#12151C">
-        <span class="lt">T</span><span class="bar"><span class="shaft" style="background:#8F6B3E"></span><span class="head" style="background:#8F6B3E"></span></span><span class="lt">ELOS</span>
+      <div style="display:flex; gap:30px; align-items:flex-end; flex-wrap:wrap; justify-content:center;">
+        <figure style="text-align:center;">
+          <svg width="160" height="50" viewBox="0 0 322 100">
+            <use href="#wordmark-full" color="#8F6B3E"/>
+          </svg>
+          <figcaption class="icons figcaption">≥40 px · full nail</figcaption>
+        </figure>
+        <figure style="text-align:center;">
+          <svg width="140" height="50" viewBox="0 0 314 100">
+            <use href="#wordmark-plain" color="#8F6B3E"/>
+          </svg>
+          <figcaption class="icons figcaption">&lt;40 px · plain bar</figcaption>
+        </figure>
       </div>
     </div>
   </div>
   <div class="meta">
-    <h3>02 · The lockup — Terminus + wordmark with the drawn nail</h3>
-    <p>The hyphen is <strong>drawn artwork now, never a text glyph</strong> (v1 was silently rendering it in a fallback system font — the "most ownable letterform" wasn't even in the brand font). Nail rebuilt per review: 4:1 head-to-shaft, exact optical hyphen position, <strong>round head on the right only</strong> — the driven nail, the asymmetry kept on purpose. Black-and-white artwork is what gets filed.</p>
-    <span class="tag">outlined artwork for filing</span><span class="tag">drawn hyphen, 4:1 nail</span><span class="tag">right-head asymmetry kept</span>
+    <h3>02 · The lockup — canonical horizontal, alternate stacked</h3>
+    <p>The hyphen is <strong>drawn artwork, never a text glyph</strong>. v3 rebuilds the driven nail to the real ratio: <strong>head width = 2.0× shaft width</strong> (v2 claimed 4:1; the CSS drew ~1.8×; that claim is dead). The head sits on the right end only — the driven side. Two production cuts: full nail at ≥40 px, plain bar below. <strong>Crossover = 40 px.</strong></p>
+    <p style="margin-top:10px;"><strong>Canonical lockup:</strong> device left, wordmark right — this is the filing composite. <strong>Stacked alternate:</strong> device above wordmark, reserved for narrow columns and square avatars where horizontal width is impossible. Do not use the stacked form as the default.</p>
+    <div style="margin-top:14px;">
+      <svg width="180" height="120" viewBox="0 0 340 220" aria-label="T-ELOS stacked alternate">
+        <use href="#lockup-stacked" color="#8F6B3E"/>
+      </svg>
+    </div>
+    <span class="tag">outlined artwork for filing</span><span class="tag">drawn hyphen, 2:1 nail</span><span class="tag">horizontal = canonical</span>
   </div>
 </div>
 
-<!-- APP ICONS + SIZE SURVIVAL -->
+<!-- SIZE-HONEST ICON SET -->
 <div class="card">
   <div class="stage">
     <div class="icons">
-      <figure><div class="ic"><svg width="128" height="128" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="18" fill="#12151C"/><path d="M 55.63 12.05 A 34 34 0 1 1 32.37 12.05" stroke="#C9975B" stroke-width="8" stroke-linecap="round"/><circle cx="32.37" cy="12.05" r="7" fill="#C9975B"/></svg></div><figcaption>128 PX</figcaption></figure>
-      <figure><div class="ic"><svg width="64" height="64" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="18" fill="#12151C"/><path d="M 55.63 12.05 A 34 34 0 1 1 32.37 12.05" stroke="#C9975B" stroke-width="8" stroke-linecap="round"/><circle cx="32.37" cy="12.05" r="7" fill="#C9975B"/></svg></div><figcaption>64 PX</figcaption></figure>
-      <figure><div class="ic"><svg width="32" height="32" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="18" fill="#12151C"/><path d="M 55.63 12.05 A 34 34 0 1 1 32.37 12.05" stroke="#C9975B" stroke-width="8" stroke-linecap="round"/><circle cx="32.37" cy="12.05" r="7" fill="#C9975B"/></svg></div><figcaption>32 PX</figcaption></figure>
-      <figure><div class="ic"><svg width="16" height="16" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="18" fill="#12151C"/><path d="M 55.63 12.05 A 34 34 0 1 1 32.37 12.05" stroke="#C9975B" stroke-width="8" stroke-linecap="round"/><circle cx="32.37" cy="12.05" r="7" fill="#C9975B"/></svg></div><figcaption>16 PX</figcaption></figure>
+      <figure><div class="ic"><svg width="128" height="128" viewBox="0 0 128 128">
+        <path d="M26,0 H102 A26,26 0 0 1 128,26 V102 A26,26 0 0 1 102,128 H26 A26,26 0 0 1 0,102 V26 A26,26 0 0 1 26,0 Z" fill="#12151C"/>
+        <path d="M84.286,20.497 A48,48 0 1 1 43.714,20.497" fill="none" stroke="#C9975B" stroke-width="12" stroke-linecap="butt"/>
+        <path d="M43.714,9.997 A10.5,10.5 0 1 1 43.714,30.997 A10.5,10.5 0 1 1 43.714,9.997 Z" fill="#C9975B"/>
+      </svg></div><figcaption>128 PX</figcaption></figure>
+      <figure><div class="ic"><svg width="64" height="64" viewBox="0 0 64 64">
+        <path d="M13,0 H51 A13,13 0 0 1 64,13 V51 A13,13 0 0 1 51,64 H13 A13,13 0 0 1 0,51 V13 A13,13 0 0 1 13,0 Z" fill="#12151C"/>
+        <path d="M42.143,10.249 A24,24 0 1 1 21.857,10.249" fill="none" stroke="#C9975B" stroke-width="6" stroke-linecap="butt"/>
+        <path d="M21.857,4.999 A5.25,5.25 0 1 1 21.857,15.499 A5.25,5.25 0 1 1 21.857,4.999 Z" fill="#C9975B"/>
+      </svg></div><figcaption>64 PX</figcaption></figure>
+      <figure><div class="ic"><svg width="32" height="32" viewBox="0 0 32 32">
+        <path d="M6,0 H26 A6,6 0 0 1 32,6 V26 A6,6 0 0 1 26,32 H6 A6,6 0 0 1 0,26 V6 A6,6 0 0 1 6,0 Z" fill="#12151C"/>
+        <path d="M21.260,5.214 A12,12 0 1 1 10.740,5.214" fill="none" stroke="#C9975B" stroke-width="3.5" stroke-linecap="butt"/>
+        <path d="M10.740,2.152 A3.0625,3.0625 0 1 1 10.740,8.277 A3.0625,3.0625 0 1 1 10.740,2.152 Z" fill="#C9975B"/>
+      </svg></div><figcaption>32 PX</figcaption></figure>
+      <figure><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24">
+        <path d="M5,0 H19 A5,5 0 0 1 24,5 V19 A5,5 0 0 1 19,24 H5 A5,5 0 0 1 0,19 V5 A5,5 0 0 1 5,0 Z" fill="#12151C"/>
+        <path d="M16.156,4.017 A9,9 0 1 1 7.844,4.017" fill="none" stroke="#C9975B" stroke-width="2.8" stroke-linecap="butt"/>
+        <path d="M7.844,1.567 A2.45,2.45 0 1 1 7.844,6.467 A2.45,2.45 0 1 1 7.844,1.567 Z" fill="#C9975B"/>
+      </svg></div><figcaption>24 PX</figcaption></figure>
+      <figure><div class="ic"><svg width="16" height="16" viewBox="0 0 16 16">
+        <path d="M3,0 H13 A3,3 0 0 1 16,3 V13 A3,3 0 0 1 13,16 H3 A3,3 0 0 1 0,13 V3 A3,3 0 0 1 3,0 Z" fill="#12151C"/>
+        <path d="M11,2.804 A6,6 0 1 1 5,2.804" fill="none" stroke="#C9975B" stroke-width="2.2" stroke-linecap="butt"/>
+        <path d="M5,0.879 A1.925,1.925 0 1 1 5,4.729 A1.925,1.925 0 1 1 5,0.879 Z" fill="#C9975B"/>
+      </svg></div><figcaption>16 PX</figcaption></figure>
     </div>
   </div>
   <div class="meta">
-    <h3>03 · Survival row — 128 / 64 / 32 / 16 px</h3>
-    <p>The Opus test: no wordmark survives 16px — nobody's does — so the icon carries the brand on the dusty cracked screen. Thick ring + solid stop, the two primitives that embroider as satin stitch on the hi-vis polo. This row is printed at actual size on the phone; if the 16px square still reads, the mark is done.</p>
-    <span class="tag">app icon</span><span class="tag">favicon</span><span class="tag">hi-vis embroidery</span>
+    <h3>03 · Size-honest icon set — hand-tuned per size</h3>
+    <p>No single viewBox scaled across sizes. Each mark is redrawn with stroke weight and gap tuned to the pixel grid: 16px gets a heavier relative stroke and a wider gap so the ring does not close; 128px keeps the fine 1.75× stop. This is the production set for favicon, app icon, hi-vis embroidery, and the dusty cracked phone screen.</p>
+    <span class="tag">16 / 24 / 32 / 64 / 128 px</span><span class="tag">no scaled master</span><span class="tag">production-ready</span>
   </div>
 </div>
 
-<!-- B&W FILING SHEET -->
+<!-- HI-VIS TEST ROW -->
 <div class="card">
-  <div class="stage black" style="gap:60px;">
-    <svg width="150" height="150" viewBox="0 0 88 88" fill="none">
-      <path d="M 55.63 12.05 A 34 34 0 1 1 32.37 12.05" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
-      <circle cx="32.37" cy="12.05" r="7" fill="#fff"/>
-      <text x="44" y="82" text-anchor="middle" fill="#fff" font-family="Archivo" font-weight="800" font-size="11" letter-spacing="2">T-ELOS</text>
+  <div class="stage">
+    <div class="hi-grid">
+      <div class="hi-cell bone">
+        <div class="hi-label" style="color:#12151C;">Bone #F2EDE4 · color</div>
+        <div class="hi-samples">
+          <div class="hi-sample">
+            <svg style="height:100mm; width:auto;" viewBox="0 0 88 88"><use href="#terminus-base" color="#C9975B"/></svg>
+            <svg style="height:16px; width:auto;" viewBox="0 0 88 88"><use href="#terminus-base" color="#C9975B"/></svg>
+          </div>
+          <div class="hi-sample">
+            <svg style="height:100mm; width:auto;" viewBox="0 0 450 120"><use href="#lockup-full" color="#8F6B3E"/></svg>
+            <svg style="height:16px; width:auto;" viewBox="0 0 450 120"><use href="#lockup-plain" color="#8F6B3E"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="hi-cell" style="background:var(--ink);">
+        <div class="hi-label" style="color:var(--bone);">Ink #12151C · color</div>
+        <div class="hi-samples">
+          <div class="hi-sample">
+            <svg style="height:100mm; width:auto;" viewBox="0 0 88 88"><use href="#terminus-base" color="#C9975B"/></svg>
+            <svg style="height:16px; width:auto;" viewBox="0 0 88 88"><use href="#terminus-base" color="#C9975B"/></svg>
+          </div>
+          <div class="hi-sample">
+            <svg style="height:100mm; width:auto;" viewBox="0 0 450 120"><use href="#lockup-full" color="#C9975B"/></svg>
+            <svg style="height:16px; width:auto;" viewBox="0 0 450 120"><use href="#lockup-plain" color="#C9975B"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="hi-cell hiyellow">
+        <div class="hi-label" style="color:#12151C;">Hi-vis yellow #F5E400 · mono only</div>
+        <div class="hi-samples">
+          <div class="hi-sample">
+            <div class="hi-label" style="color:#12151C;">BLACK</div>
+            <svg style="height:100mm; width:auto;" viewBox="0 0 88 88"><use href="#terminus-base" color="#000"/></svg>
+            <svg style="height:16px; width:auto;" viewBox="0 0 88 88"><use href="#terminus-base" color="#000"/></svg>
+            <svg style="height:100mm; width:auto;" viewBox="0 0 450 120"><use href="#lockup-full" color="#000"/></svg>
+            <svg style="height:16px; width:auto;" viewBox="0 0 450 120"><use href="#lockup-plain" color="#000"/></svg>
+          </div>
+          <div class="hi-sample">
+            <div class="hi-label" style="color:#12151C;">WHITE</div>
+            <svg style="height:100mm; width:auto;" viewBox="0 0 88 88"><use href="#terminus-base" color="#fff"/></svg>
+            <svg style="height:16px; width:auto;" viewBox="0 0 88 88"><use href="#terminus-base" color="#fff"/></svg>
+            <svg style="height:100mm; width:auto;" viewBox="0 0 450 120"><use href="#lockup-full" color="#fff"/></svg>
+            <svg style="height:16px; width:auto;" viewBox="0 0 450 120"><use href="#lockup-plain" color="#fff"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="hi-cell higreen">
+        <div class="hi-label" style="color:#12151C;">Hi-vis green #C6E400 · mono only</div>
+        <div class="hi-samples">
+          <div class="hi-sample">
+            <div class="hi-label" style="color:#12151C;">BLACK</div>
+            <svg style="height:100mm; width:auto;" viewBox="0 0 88 88"><use href="#terminus-base" color="#000"/></svg>
+            <svg style="height:16px; width:auto;" viewBox="0 0 88 88"><use href="#terminus-base" color="#000"/></svg>
+            <svg style="height:100mm; width:auto;" viewBox="0 0 450 120"><use href="#lockup-full" color="#000"/></svg>
+            <svg style="height:16px; width:auto;" viewBox="0 0 450 120"><use href="#lockup-plain" color="#000"/></svg>
+          </div>
+          <div class="hi-sample">
+            <div class="hi-label" style="color:#12151C;">WHITE</div>
+            <svg style="height:100mm; width:auto;" viewBox="0 0 88 88"><use href="#terminus-base" color="#fff"/></svg>
+            <svg style="height:16px; width:auto;" viewBox="0 0 88 88"><use href="#terminus-base" color="#fff"/></svg>
+            <svg style="height:100mm; width:auto;" viewBox="0 0 450 120"><use href="#lockup-full" color="#fff"/></svg>
+            <svg style="height:16px; width:auto;" viewBox="0 0 450 120"><use href="#lockup-plain" color="#fff"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="meta">
+    <h3>04 · Hi-vis test row — 100mm and 16px</h3>
+    <p>Hi-vis yellow and green are black-and-white mono only. <strong>Bronze never goes on hi-vis</strong> — it vanishes and fails the site-safety rule. Supply a mono embroidery file for the polo: the stop becomes a satin-stitch dot, the ring a run stitch. Standard bone and ink rows keep the colour pairings.</p>
+    <span class="tag">#F5E400</span><span class="tag">#C6E400</span><span class="tag">mono embroidery file required</span>
+  </div>
+</div>
+
+<!-- FILING SHEET v3 -->
+<div class="card" id="filingsheet">
+  <div class="stage black" style="gap:40px;">
+    <svg width="150" height="150" viewBox="0 0 88 88" aria-label="Terminus device mark filing artwork">
+      <path d="M58.369,13.186 A34,34 0 1 1 29.631,13.186" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt"/>
+      <path d="M29.631,6.186 A7,7 0 1 1 29.631,20.186 A7,7 0 1 1 29.631,6.186 Z" fill="#fff"/>
     </svg>
-    <svg width="150" height="150" viewBox="0 0 88 88" fill="none">
-      <path d="M 55.63 12.05 A 34 34 0 1 1 32.37 12.05" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
-      <circle cx="32.37" cy="12.05" r="7" fill="#fff"/>
+    <svg width="420" height="140" viewBox="0 0 460 150" aria-label="T-ELOS composite filing mark">
+      <!-- device -->
+      <path d="M58.369,29.186 A34,34 0 1 1 29.631,29.186" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt"/>
+      <path d="M29.631,22.186 A7,7 0 1 1 29.631,36.186 A7,7 0 1 1 29.631,22.186 Z" fill="#fff"/>
+      <!-- wordmark -->
+      <g transform="translate(118,10)">
+        <g transform="translate(0,0)"><path d="M4,4 L52,4 M28,4 L28,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt"/></g>
+        <g transform="translate(62,0)">
+          <path d="M0,46 H20 V54 H0 Z" fill="#fff"/>
+          <path d="M20,42 A8,8 0 1 1 20,58 A8,8 0 1 1 20,42 Z" fill="#fff"/>
+        </g>
+        <g transform="translate(96,0)"><path d="M4,4 L44,4 M4,50 L40,50 M4,96 L44,96 M4,4 L4,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt"/></g>
+        <g transform="translate(150,0)"><path d="M4,4 L4,96 M4,96 L36,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt"/></g>
+        <g transform="translate(196,0)"><path d="M32,4 A28,46 0 1 1 32,96 A28,46 0 1 1 32,4 Z" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt"/></g>
+        <g transform="translate(266,0)"><path d="M4,4 L52,4 M4,4 L4,50 M4,50 L52,50 M52,50 L52,96 M4,96 L52,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt"/></g>
+      </g>
+      <!-- house line: CONSTRUCTION SOFTWARE -->
+      <g transform="translate(118,116) scale(0.14)">
+        <path d="M4,4 L44,4 M4,4 L4,96 M4,96 L44,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(0,0)"/>
+        <path d="M32,4 A28,46 0 1 1 32,96 A28,46 0 1 1 32,4 Z" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(54,0)"/>
+        <path d="M4,4 L4,96 M4,4 L52,96 M52,4 L52,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(124,0)"/>
+        <path d="M4,4 L52,4 M4,4 L4,50 M4,50 L52,50 M52,50 L52,96 M4,96 L52,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(186,0)"/>
+        <path d="M4,4 L52,4 M28,4 L28,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(248,0)"/>
+        <path d="M4,4 L4,96 M4,4 L44,4 M4,50 L40,50 M40,50 L48,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(310,0)"/>
+        <path d="M4,4 L4,92 M48,4 L48,92 M4,92 L48,92" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(368,0)"/>
+        <path d="M4,4 L44,4 M4,4 L4,96 M4,96 L44,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(426,0)"/>
+        <path d="M4,4 L52,4 M28,4 L28,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(480,0)"/>
+        <path d="M4,4 L28,4 M16,4 L16,96 M4,96 L28,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(542,0)"/>
+        <path d="M32,4 A28,46 0 1 1 32,96 A28,46 0 1 1 32,4 Z" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(580,0)"/>
+        <path d="M4,4 L4,96 M4,4 L52,96 M52,4 L52,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(650,0)"/>
+        <path d="M4,4 L52,4 M4,4 L4,50 M4,50 L52,50 M52,50 L52,96 M4,96 L52,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(714,0)"/>
+        <path d="M32,4 A28,46 0 1 1 32,96 A28,46 0 1 1 32,4 Z" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(776,0)"/>
+        <path d="M4,4 L4,96 M4,4 L44,4 M4,50 L40,50" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(846,0)"/>
+        <path d="M4,4 L52,4 M28,4 L28,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(900,0)"/>
+        <path d="M4,4 L20,96 M20,96 L36,4 M36,4 L52,96 M52,96 L68,4" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(962,0)"/>
+        <path d="M4,96 L28,4 M28,4 L52,96 M14,58 L42,58" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(1040,0)"/>
+        <path d="M4,4 L4,96 M4,4 L44,4 M4,50 L40,50 M40,50 L48,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(1102,0)"/>
+        <path d="M4,4 L44,4 M4,50 L40,50 M4,96 L44,96 M4,4 L4,96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="butt" transform="translate(1160,0)"/>
+      </g>
     </svg>
   </div>
   <div class="meta">
-    <h3>04 · Filing sheet — black &amp; white, no colour claim</h3>
-    <p>Trademarks file in monochrome: protection covers <em>any</em> colour then. Left = the composite lockup (device + wordmark), right = the device alone — both get filed, per Opus. The application goes in with a narrow goods description (construction project management software, cl. 9; SaaS for construction trades, cl. 42) and the small-claim fee path.</p>
-    <span class="tag">composite + device, both filed</span><span class="tag">no colour claim</span><span class="tag">narrow goods description</span>
+    <h3>05 · Filing sheet v3 — black &amp; white, true outlined paths</h3>
+    <p>Left: the device alone. Right: the canonical composite — device + wordmark + fixed house line <strong>CONSTRUCTION SOFTWARE</strong> beneath. The house line is a fixed relationship element so the mark does not rest on punctuation. Every letter, the hyphen, the arc, and the stop are drawn <code>&lt;path&gt;</code> geometry. No live text, no glyphs, no colour claim.</p>
+    <span class="tag">device + composite</span><span class="tag">path-only</span><span class="tag">no colour claim</span>
   </div>
 </div>
 
@@ -154,7 +390,7 @@
   </div>
   <div class="warn">
     <div class="bodyline" style="margin-top:0">
-      <strong>Contrast law (both reviewers):</strong> bronze-on-ink ≈ 7:1 — the hero pairing. <strong>Never set bronze text on bone</strong> (≈2.2:1, fails). Dark Bronze #8F6B3E keeps its name (v1's "patina" clash is dead — verdigris is the green). <strong>Verdigris is demoted to state color only</strong>: "loop closed", always paired with an icon or label for colour-blind tradies. Bronze is the one must-keep both heads agreed on — the Talos story in one hex code.
+      <strong>Contrast law:</strong> bronze-on-ink ≈ 7:1 — the hero pairing. <strong>Never set bronze text on bone</strong> (≈2.2:1, fails). Dark Bronze keeps its name; verdigris is demoted to state colour only: "loop closed", always paired with an icon or label. Bronze is the one must-keep. Hi-vis yellow (#F5E400) and hi-vis green (#C6E400) are mono-only substrates — no bronze thread.
     </div>
   </div>
 </div>
@@ -167,13 +403,42 @@
   <div class="sm" style="margin-top:22px;">Receipts / money / states</div>
   <div class="specimen" style="font-family:'IBM Plex Mono',monospace; font-size:28px;">IBM PLEX MONO — $3,520.00 · LOOP OPEN</div>
   <div class="sm" style="margin-top:22px;">Body</div>
-  <div class="bodyline">Inter — body stays (both heads kept it). Space Grotesk is <strong>cut</strong>: the house face of a thousand crypto landing pages (Opus). The serif route is cut from this brand and stays with the Operator family. Three faces, three jobs.</div>
+  <div class="bodyline">Inter — body stays. Space Grotesk is cut: the house face of a thousand crypto landing pages. The serif route stays with the Operator family. Three faces, three jobs.</div>
+</div>
+
+<!-- FALLBACK NAMES PANEL -->
+<div class="pair">
+  <h3>Fallback names — change the SPOKEN mark</h3>
+  <p class="bodyline" style="margin-top:0;">Spoken aloud, "T-ELOS" <em>is</em> "TELOS". Punctuation does not save a sound-alike. If clearance or market testing forces a spoken distinction, add a second word. <strong>Fallback selection is the boss's call; this panel is the shortlist.</strong></p>
+  <div class="fallback-list">
+    <div class="fallback-card">
+      <h4>T-ELOS WORKS</h4>
+      <p>Spoken test: "tee-ee-loss works" — no collision with bare TELOS.</p>
+    </div>
+    <div class="fallback-card">
+      <h4>T-ELOS SITE</h4>
+      <p>Spoken test: "tee-ee-loss site" — grounds the mark in construction.</p>
+    </div>
+    <div class="fallback-card">
+      <h4>T-ELOS FIELD</h4>
+      <p>Spoken test: "tee-ee-loss field" — trades-first, site-specific.</p>
+    </div>
+    <div class="fallback-card">
+      <h4>T-ELOS PRO</h4>
+      <p>Spoken test: "tee-ee-loss pro" — shortest, but "Pro" is crowded in SaaS.</p>
+    </div>
+  </div>
 </div>
 
 <!-- OPEN QUESTIONS -->
 <div class="open">
-  <h3>Open question — the sound problem (Opus, uncomfortable truth)</h3>
-  <p class="bodyline" style="margin-top:8px">Spoken aloud, "T-ELOS" <em>is</em> "TELOS" — and Australian deceptive-similarity law weighs sound heavily. Punctuation is near-invisible to an examiner. The device improves the odds; it does not guarantee registration while a rival owns the bare word in class 9. Before artwork spend: a clearance opinion (~$300–600) and a hard look at adding a distinguishing word element to the name. The register gave us the company; the trademark still has to be earned.</p>
+  <div class="gate-badge">GATE — clearance opinion before artwork spend</div>
+  <h3>Open questions — no fake resolutions</h3>
+  <ul class="bodyline" style="margin-top:8px; color:#C7CBD4;">
+    <li><strong>Clearance opinion:</strong> still the gate before any artwork or filing spend. Do not commission production until the opinion is in hand.</li>
+    <li><strong>Figurative device search:</strong> ring-and-dot / arc-and-dot devices in classes 9 and 42 are still pending. The Terminus helps, but it is not a clearance.</li>
+    <li><strong>Vivo non-use investigation:</strong> pending. A non-use action is a long road; do not bank the filing strategy on it.</li>
+  </ul>
 </div>
 
 </body>

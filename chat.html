@@ -56,11 +56,11 @@
   .head .sub{margin-top:5px; font-size:15.5px; color:var(--muted); letter-spacing:.1px;}
   .head .sub b{color:#3CB371; font-weight:600;}
   .lockchip{
-    position:absolute; right:34px; top:14px;
+    position:absolute; right:34px; top:14px; height:46px;
     display:flex; align-items:center; gap:7px;
     background:rgba(10,10,10,.045); border:1px solid rgba(10,10,10,.1);
     color:#9A9AA0; font-size:11px; font-weight:700; letter-spacing:.8px;
-    padding:7px 13px; border-radius:999px; cursor:pointer; user-select:none;
+    padding:0 16px; border-radius:999px; cursor:pointer; user-select:none;
   }
   .lockchip:hover{background:rgba(10,10,10,.08);}
   .lockchip.server{background:rgba(10,10,10,.9); border-color:rgba(10,10,10,.9); color:var(--amber);}
@@ -205,15 +205,36 @@
   .phone.dark .mic u{border-color:#0A0A0A;}
   .phone.dark .homebar{background:rgba(245,245,247,.75);}
   .phone.dark .att .ficon{background:linear-gradient(180deg,#2A2A2F 0%,#202024 100%);}
-  .moonchip{position:absolute; right:196px; top:14px; width:32px; height:32px; border-radius:50%;
+  .moonchip{position:absolute; right:172px; top:14px; width:46px; height:46px; border-radius:50%;
     background:rgba(10,10,10,.045); border:1px solid rgba(10,10,10,.1); color:#9A9AA0;
-    display:flex; align-items:center; justify-content:center; font-size:15px; cursor:pointer; user-select:none;}
+    display:flex; align-items:center; justify-content:center; font-size:17px; cursor:pointer; user-select:none;}
   .voice.mine{align-self:flex-end; background:var(--me-bg); border-radius:26px 26px 8px 26px;}
   .voice.mine .vdur{color:var(--me-meta);}
   .voice.mine .wave b{background:rgba(140,140,145,.45);}
   .voice.mine .wave b.on{background:var(--me-fg);}
   .field{color:var(--ink);}
   .field:empty::before{content:attr(data-ph); color:#B0B0B6;}
+
+  /* ---------- mobile fit + touch truth ---------- */
+  html,body{height:100%;}
+  body{display:flex; justify-content:center; align-items:flex-start; -webkit-tap-highlight-color:transparent;}
+  .phone{transform-origin:top center;}
+  .btn,.chip,.plus,.mic,.lockchip,.moonchip,.pill,.play{user-select:none; -webkit-user-select:none; touch-action:manipulation;}
+  .btn:active,.chip:active,.plus:active,.lockchip:active,.moonchip:active,.pill:active{filter:brightness(.92); transform:scale(.97);}
+  .mic:active{transform:scale(.95);}
+  .mic.rec{animation:recpulse 1s infinite;}
+  @keyframes recpulse{
+    0%,100%{box-shadow:0 18px 40px rgba(255,199,0,.5), inset 0 2px 6px rgba(255,255,255,.55), inset 0 -8px 18px rgba(0,0,0,.16);}
+    50%{box-shadow:0 0 0 14px rgba(255,199,0,.28), 0 18px 40px rgba(255,199,0,.5);}
+  }
+  .pills{display:flex; gap:8px; padding:0 4px 12px; overflow-x:auto;}
+  .pills::-webkit-scrollbar{height:0;}
+  .pill{flex:0 0 auto; border:none; background:var(--field-bg); color:var(--ink); font-size:13.5px; font-weight:700;
+    letter-spacing:.2px; min-height:46px; padding:0 18px; border-radius:999px; cursor:pointer;}
+  .pill:active{background:var(--amber);}
+  .qcard.left{align-self:flex-start;}
+  /* iOS focuses 15px fields into an auto-zoom — 16px keeps the canvas honest */
+  .field{font-size:16px;}
 </style>
 </head>
 <body>
@@ -302,6 +323,11 @@
 
   <!-- input pod -->
   <div class="pod">
+    <div class="pills">
+      <button class="pill" type="button" onclick="askRate()">Check a rate</button>
+      <button class="pill" type="button" onclick="priceJob()">Price a job</button>
+      <button class="pill" type="button" onclick="chaseInvoice()">Chase an invoice</button>
+    </div>
     <div class="podrow">
       <div class="chip gal" title="Photos" onclick="addShot('PHOTO · 4 MAR')"><i></i><u></u></div>
       <div class="chip cam" title="Camera" onclick="addShot('CAMERA · NOW')"><i></i><u></u></div>
@@ -410,17 +436,67 @@ function addShot(cap){
   agentReply('Filed to the job.', '2:05 pm');
 }
 
-function micTap(){
+function micTap(dur){
   const v = document.createElement('div');
   v.className = 'voice mine';
   const hs = [10,18,26,34,22,14,20,30,24,12,16,28];
   let bars = '';
   hs.forEach((h,i)=>{ bars += '<b class="' + (i < 5 ? 'on' : '') + '" style="height:' + h + 'px"></b>'; });
   // ponytail: constant markup, no user input
-  v.innerHTML = '<div class="play"><i></i></div><div class="wave">' + bars + '</div><div class="vdur">0:07</div>';
+  v.innerHTML = '<div class="play"><i></i></div><div class="wave">' + bars + '</div><div class="vdur">' + (dur || '0:07') + '</div>';
   thread.appendChild(v);
   thread.scrollTop = thread.scrollHeight;
   agentReply('Heard you. Chasing Friday if nothing lands — answer goes on your brief.', '2:05 pm');
+}
+
+/* hold to talk — press and hold, release to send (the label finally means it) */
+(function(){
+  const mic = document.querySelector('.mic');
+  let recT = 0;
+  mic.addEventListener('pointerdown', e => {
+    e.preventDefault();
+    recT = Date.now();
+    mic.classList.add('rec');
+  });
+  ['pointerup','pointercancel','pointerleave'].forEach(ev => mic.addEventListener(ev, () => {
+    if (!mic.classList.contains('rec')) return;
+    mic.classList.remove('rec');
+    const secs = Math.max(2, Math.round((Date.now() - recT) / 1000) + 5);
+    micTap('0:' + String(secs).padStart(2, '0'));
+  }));
+})();
+
+/* quick actions — the three questions a tradie actually asks */
+function askRate(){
+  addMsg('What’s my rate for supply and install vinyl?', true);
+  const t = document.createElement('div');
+  t.className = 'typing'; t.innerHTML = '<i></i><i></i><i></i>'; // ponytail: constant markup
+  thread.appendChild(t);
+  thread.scrollTop = thread.scrollHeight;
+  setTimeout(()=>{
+    t.remove();
+    addMsg('Straight off your supplier pricing — three sources on file, last matched 12 Feb.', false, '2:06 pm · rates on file');
+    const c = document.createElement('div');
+    c.className = 'qcard left';
+    c.innerHTML = '<div class="qhead"><div class="lbl">PRICING ON FILE</div><div class="ok">3 SOURCES</div></div>'
+      + '<div class="qbody">'
+      + '<div class="qrow"><span>Vinyl — supply &amp; install</span><b>$110 /m²</b></div>'
+      + '<div class="qrow"><span>Carpet tile — supply &amp; install</span><b>$95 /m²</b></div>'
+      + '<div class="qrow"><span>Trims &amp; edging</span><b>$12.40 /lm</b></div>'
+      + '<div class="qrow"><span>Floor prep — grind &amp; seal</span><b>$18 /m²</b></div>'
+      + '</div>'
+      + '<div class="qtotal"><div class="t-l">RATE FOR THIS JOB — 410 BRIDGE RD</div><div class="t-v">$110/m²</div></div>';
+    thread.appendChild(c);
+    thread.scrollTop = thread.scrollHeight;
+  }, 750);
+}
+function priceJob(){
+  addMsg('Price this job', true);
+  agentReply('Send the plan or a few photos. You’ll get the m², the rate off your pricing file, and the number back before you’re off site.', '2:06 pm');
+}
+function chaseInvoice(){
+  addMsg('Chase that credit note if nothing back by Friday.', true);
+  agentReply('Diared. If no credit lands by Friday 9am I chase the trade desk myself and put the answer on your brief.', '2:05 pm');
 }
 
 function sendMsg(){
@@ -436,6 +512,15 @@ document.getElementById('field').addEventListener('keydown', e => {
 });
 
 thread.scrollTop = thread.scrollHeight; // ponytail: land on the latest, the payoff screen
+
+/* fit the fixed canvas to any phone screen (transform scale, layout height compensated) */
+function fit(){
+  const s = Math.min(1, window.innerWidth / 560, (window.innerHeight - 16) / 1120);
+  phone.style.transform = 'scale(' + s + ')';
+  phone.style.marginBottom = (1120 * (s - 1)) + 'px';
+}
+window.addEventListener('resize', fit);
+fit();
 
 /* render states: #drop = the evidence, #decision = the loop, #cipher = server view */
 (function(){

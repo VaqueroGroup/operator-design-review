@@ -3,158 +3,177 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>T-ELOS — Brand Brainstorms</title>
+<title>T-ELOS — Brand Board v2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=Archivo:wght@600;800&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#12151C; --ink2:#1B202B; --bone:#F2EDE4; --bronze:#C9975B; --bronze-d:#8F6B3E;
-    --patina:#5E8B7E; --grey:#8A8F9A; --line:#2A3140;
-  }
+  :root{ --ink:#12151C; --ink2:#1B202B; --bone:#F2EDE4; --bronze:#C9975B; --dark-bronze:#8F6B3E;
+    --verdigris:#5E8B7E; --grey:#8A8F9A; --line:#2A3140; }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{background:var(--ink); color:var(--bone); font-family:'Inter',sans-serif; padding:44px 40px 70px;}
-  .kicker{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.32em; color:var(--bronze); text-transform:uppercase;}
-  h1{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:42px; letter-spacing:.14em; margin:10px 0 6px;}
-  h1 .hy{color:var(--bronze);}
-  .sub{color:var(--grey); max-width:720px; font-size:15px; line-height:1.65; margin-bottom:8px;}
+  .kicker{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.30em; color:var(--bronze); text-transform:uppercase;}
+  h1{font-family:'Archivo',sans-serif; font-weight:800; font-size:44px; letter-spacing:.12em; margin:10px 0 6px; display:flex; align-items:center; gap:0;}
+  .sub{color:var(--grey); max-width:760px; font-size:15px; line-height:1.65;}
   .rule{height:1px; background:var(--line); margin:30px 0;}
-  .grid{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
-  .card{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--ink2);}
-  .stage{padding:52px 30px; display:flex; align-items:center; justify-content:center; min-height:190px;}
+  .card{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--ink2); margin-bottom:22px;}
+  .stage{padding:56px 30px; display:flex; align-items:center; justify-content:center; min-height:210px;}
   .stage.bone{background:var(--bone);}
-  .meta{padding:16px 20px 20px; border-top:1px solid var(--line);}
-  .meta h3{font-family:'Space Grotesk',sans-serif; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:var(--bronze); margin-bottom:7px;}
-  .meta p{font-size:13.5px; line-height:1.6; color:#C7CBD4;}
-  .tag{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; padding:3px 9px; border:1px solid var(--line); border-radius:20px; color:var(--grey); margin:8px 6px 0 0;}
+  .stage.black{background:#000;}
+  .stage.white{background:#fff;}
+  .meta{padding:16px 22px 22px; border-top:1px solid var(--line);}
+  .meta h3{font-family:'Archivo',sans-serif; font-size:13px; letter-spacing:.20em; text-transform:uppercase; color:var(--bronze); margin-bottom:8px;}
+  .meta p{font-size:13.5px; line-height:1.65; color:#C7CBD4;}
+  .meta ul{margin:8px 0 0 18px; font-size:13px; line-height:1.7; color:#C7CBD4;}
+  .tag{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em; padding:3px 9px; border:1px solid var(--line); border-radius:20px; color:var(--grey); margin:10px 7px 0 0;}
 
-  /* ——— Concept 1: THE NAIL HYPHEN ——— */
-  .c1{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:54px; letter-spacing:.16em; display:flex; align-items:center; gap:2px;}
-  .c1 .nail{width:46px; height:12px; margin:0 10px; position:relative; display:inline-block;}
-  .c1 .nail::before{content:""; position:absolute; left:0; right:0; top:5px; height:2px; background:var(--bronze);}
-  .c1 .nail::after{content:""; position:absolute; right:0; top:0; width:12px; height:12px; border-radius:50%; background:var(--bronze);}
-  .bone .c1 .nail::before, .bone .c1 .nail::after{background:var(--bronze-d);}
+  /* wordmark with drawn hyphen bar (never a glyph) */
+  .wm{display:inline-flex; align-items:center; letter-spacing:.14em;}
+  .wm .lt{font-family:'Archivo',sans-serif; font-weight:800;}
+  .wm .bar{display:inline-flex; align-items:center; margin:0 .14em; position:relative; align-self:stretch;}
+  .wm .bar .shaft{width:.30em; height:.105em; background:var(--bronze);}
+  .wm .bar .head{width:.19em; height:.19em; border-radius:50%; background:var(--bronze); margin-left:-.012em;}
 
-  /* ——— Concept 2: THE TERMINUS ——— */
-  .c2wrap{display:flex; align-items:center; gap:26px;}
-  .c2svg{width:88px; height:88px;}
-  .c2{font-family:'Archivo',sans-serif; font-weight:800; font-size:44px; letter-spacing:.10em;}
+  .hero-wm{font-size:64px;}
+  .lockup-wm{font-size:40px;}
 
-  /* ——— Concept 3: THE TAU ——— */
-  .c3wrap{display:flex; align-items:center; gap:24px;}
-  .c3svg{width:84px; height:84px;}
-  .c3{font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:46px; letter-spacing:.30em;}
-
-  /* ——— Concept 4: THE FULL STOP ——— */
-  .c4wrap{text-align:center;}
-  .c4{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:58px; letter-spacing:.22em;}
-  .c4 .dot{color:var(--bronze);}
-  .c4tag{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.42em; color:var(--grey); margin-top:12px; text-transform:uppercase;}
-
-  /* type pairing section */
-  .pair{border:1px solid var(--line); border-radius:14px; padding:26px 28px; background:var(--ink2); margin-top:22px;}
-  .pair h3{font-family:'Space Grotesk',sans-serif; font-size:13px; letter-spacing:.22em; text-transform:uppercase; color:var(--bronze); margin-bottom:16px;}
-  .specimen{font-size:44px; line-height:1.15; margin:6px 0 4px;}
-  .sm{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:var(--grey); text-transform:uppercase;}
-  .bodyline{font-size:15px; color:#C7CBD4; line-height:1.7; margin-top:10px; max-width:760px;}
+  /* icon row */
+  .icons{display:flex; align-items:flex-end; gap:34px; justify-content:center;}
+  .icons figure{text-align:center;}
+  .icons figcaption{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; color:var(--grey); margin-top:10px;}
+  .ic{background:var(--ink); border:1px solid var(--line); border-radius:12px; padding:6px; display:inline-block;}
 
   /* palette */
   .sw{display:flex; gap:14px; margin-top:18px;}
-  .sw div{flex:1; height:74px; border-radius:10px; border:1px solid var(--line); display:flex; align-items:flex-end; padding:8px 10px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em;}
+  .sw div{flex:1; height:86px; border-radius:10px; border:1px solid var(--line); display:flex; align-items:flex-end; padding:9px 11px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; line-height:1.5;}
+  .pair{border:1px solid var(--line); border-radius:14px; padding:26px 28px; background:var(--ink2); margin-bottom:22px;}
+  .pair h3{font-family:'Archivo',sans-serif; font-size:13px; letter-spacing:.22em; text-transform:uppercase; color:var(--bronze); margin-bottom:16px;}
+  .specimen{margin:6px 0 4px;}
+  .sm{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:var(--grey); text-transform:uppercase;}
+  .bodyline{font-size:15px; color:#C7CBD4; line-height:1.7; margin-top:10px; max-width:780px;}
+  .warn{border-left:3px solid var(--verdigris); padding:4px 0 4px 16px; margin-top:14px;}
+  .open{border:1px dashed var(--dark-bronze); border-radius:14px; padding:22px 26px; background:rgba(143,107,62,.08);}
+  .open h3{color:var(--bronze);}
 </style>
 </head>
 <body>
 
-<div class="kicker">Brand brainstorm · Travis × Cowboy · 2026-10-09</div>
-<h1>T<span class="hy">-</span>ELOS</h1>
-<p class="sub">τέλος — the final end of a purpose. The name is a <em>machine that closes loops</em>, so the design language writes itself: lines that travel, then stop decisively. The hyphen is the most ownable thing on the page — it's the one letterform Vivo's "Telos" doesn't have. Four directions, from armour to philosophy.</p>
+<div class="kicker">Brand board v2 · decision sheet · 2026-10-09</div>
+<h1>
+  <span class="wm hero-wm"><span class="lt">T</span><span class="bar"><span class="shaft"></span><span class="head"></span></span><span class="lt">ELOS</span></span>
+</h1>
+<p class="sub">v2, per the two heads. <strong>The device carries the trademark now</strong> — the Terminus is the flag, corrected and filing-ready. The nail survives where it belongs: welded into the wordmark as the drawn hyphen, weight-matched to the caps. Kill list from v1 is dead: the Tau and the Full Stop are gone, Space Grotesk is gone, serif pairing is gone.</p>
 <div class="rule"></div>
 
-<div class="grid">
-
-  <!-- 1 -->
-  <div class="card">
-    <div class="stage"><div class="c1">T<span class="nail"></span>ELOS</div></div>
-    <div class="meta">
-      <h3>01 · The Nail Hyphen</h3>
-      <p>The hyphen becomes the <strong>bronze nail</strong> — the Talos myth: the single pin that seals the lifeblood. A rivet through the word. Tradesmen know what a nail is. It welds the myth, the game, and the job site into one 2-millimetre detail.</p>
-      <span class="tag">Space Grotesk Bold</span><span class="tag">ownable hyphen</span><span class="tag">works at 16px</span>
-    </div>
+<!-- HERO: THE TERMINUS (FIXED) -->
+<div class="card">
+  <div class="stage">
+    <svg width="240" height="240" viewBox="0 0 88 88" fill="none" aria-label="The Terminus mark">
+      <path d="M 55.63 12.05 A 34 34 0 1 1 32.37 12.05" stroke="#C9975B" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="32.37" cy="12.05" r="7" fill="#C9975B"/>
+    </svg>
   </div>
+  <div class="meta">
+    <h3>01 · The Terminus — the trademark mark (primary)</h3>
+    <p>A line that nearly circles its purpose — then <strong>stops dead in a full stop</strong>. τέλος: the final end of a process. Both review fixes are in:</p>
+    <ul>
+      <li><strong>Terminal at the END of the stroke</strong> (v1 had it at the start — backwards).</li>
+      <li><strong>Sweep 320°</strong>, single short gap at top — not the old 229° "C for spinner".</li>
+      <li><strong>Terminal 1.75× stroke weight</strong> — reads as a full stop, not a rounded cap.</li>
+      <li>Geometry inside the viewBox — the v1 clipping is gone.</li>
+    </ul>
+    <span class="tag">device mark</span><span class="tag">separable — files alone AND composite</span><span class="tag">1.75× terminal</span>
+  </div>
+</div>
 
-  <!-- 2 -->
-  <div class="card">
-    <div class="stage"><div class="c2wrap">
-      <svg class="c2svg" viewBox="0 0 88 88" fill="none">
-        <path d="M 14 74 A 38 38 0 1 1 78 48" stroke="#C9975B" stroke-width="7" stroke-linecap="round"/>
-        <circle cx="14" cy="74" r="8" fill="#C9975B"/>
+<!-- LOCKUP -->
+<div class="card">
+  <div class="stage bone">
+    <div style="display:flex; align-items:center; gap:34px;">
+      <svg width="110" height="110" viewBox="0 0 88 88" fill="none">
+        <path d="M 55.63 12.05 A 34 34 0 1 1 32.37 12.05" stroke="#8F6B3E" stroke-width="8" stroke-linecap="round"/>
+        <circle cx="32.37" cy="12.05" r="7" fill="#8F6B3E"/>
       </svg>
-      <div class="c2">T&#8209;ELOS</div>
-    </div></div>
-    <div class="meta">
-      <h3>02 · The Terminus</h3>
-      <p>A line that almost circles — then <strong>stops hard</strong> in a filled point. That's telos: the end where the process is complete. The unfinished circle says "the loop is open"; the point says "not on my watch." The mark <em>is</em> the product.</p>
-      <span class="tag">Archivo ExtraBold</span><span class="tag">abstract mark</span><span class="tag">app icon ready</span>
+      <div class="wm lockup-wm" style="color:#12151C">
+        <span class="lt">T</span><span class="bar"><span class="shaft" style="background:#8F6B3E"></span><span class="head" style="background:#8F6B3E"></span></span><span class="lt">ELOS</span>
+      </div>
     </div>
   </div>
+  <div class="meta">
+    <h3>02 · The lockup — Terminus + wordmark with the drawn nail</h3>
+    <p>The hyphen is <strong>drawn artwork now, never a text glyph</strong> (v1 was silently rendering it in a fallback system font — the "most ownable letterform" wasn't even in the brand font). Nail rebuilt per review: 4:1 head-to-shaft, exact optical hyphen position, <strong>round head on the right only</strong> — the driven nail, the asymmetry kept on purpose. Black-and-white artwork is what gets filed.</p>
+    <span class="tag">outlined artwork for filing</span><span class="tag">drawn hyphen, 4:1 nail</span><span class="tag">right-head asymmetry kept</span>
+  </div>
+</div>
 
-  <!-- 3 -->
-  <div class="card">
-    <div class="stage bone"><div class="c3wrap">
-      <svg class="c3svg" viewBox="0 0 84 84" fill="none">
-        <path d="M 20 24 H 64 M 42 24 V 66" stroke="#12151C" stroke-width="7" stroke-linecap="square"/>
-        <path d="M 30 66 H 54" stroke="#C9975B" stroke-width="7" stroke-linecap="square"/>
-      </svg>
-      <div class="c3" style="color:#12151C">T&#8209;ELOS</div>
-    </div></div>
-    <div class="meta">
-      <h3>03 · The Tau</h3>
-      <p>Greek letter τ — the T of Telos, the old sign of <strong>protection and completion</strong>. Crossbar up top, then a bronze stroke closing the foot: the baseline "sealed." Inscription feel without the toga. This one holds a crest or stamp beautifully.</p>
-      <span class="tag">Space Grotesk Medium</span><span class="tag">stamp/crest ready</span><span class="tag">Greek root</span>
+<!-- APP ICONS + SIZE SURVIVAL -->
+<div class="card">
+  <div class="stage">
+    <div class="icons">
+      <figure><div class="ic"><svg width="128" height="128" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="18" fill="#12151C"/><path d="M 55.63 12.05 A 34 34 0 1 1 32.37 12.05" stroke="#C9975B" stroke-width="8" stroke-linecap="round"/><circle cx="32.37" cy="12.05" r="7" fill="#C9975B"/></svg></div><figcaption>128 PX</figcaption></figure>
+      <figure><div class="ic"><svg width="64" height="64" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="18" fill="#12151C"/><path d="M 55.63 12.05 A 34 34 0 1 1 32.37 12.05" stroke="#C9975B" stroke-width="8" stroke-linecap="round"/><circle cx="32.37" cy="12.05" r="7" fill="#C9975B"/></svg></div><figcaption>64 PX</figcaption></figure>
+      <figure><div class="ic"><svg width="32" height="32" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="18" fill="#12151C"/><path d="M 55.63 12.05 A 34 34 0 1 1 32.37 12.05" stroke="#C9975B" stroke-width="8" stroke-linecap="round"/><circle cx="32.37" cy="12.05" r="7" fill="#C9975B"/></svg></div><figcaption>32 PX</figcaption></figure>
+      <figure><div class="ic"><svg width="16" height="16" viewBox="0 0 88 88" fill="none"><rect width="88" height="88" rx="18" fill="#12151C"/><path d="M 55.63 12.05 A 34 34 0 1 1 32.37 12.05" stroke="#C9975B" stroke-width="8" stroke-linecap="round"/><circle cx="32.37" cy="12.05" r="7" fill="#C9975B"/></svg></div><figcaption>16 PX</figcaption></figure>
     </div>
   </div>
-
-  <!-- 4 -->
-  <div class="card">
-    <div class="stage"><div class="c4wrap">
-      <div class="c4">T&#8209;ELOS<span class="dot">.</span></div>
-      <div class="c4tag">The one that closes the loop</div>
-    </div></div>
-    <div class="meta">
-      <h3>04 · The Full Stop</h3>
-      <p>The quiet, expensive one — old-style serif, wide tracking, and a <strong>bronze full stop</strong> after the word. The period is the whole idea: <em>the end of the process, done</em>. Tagline locks the meaning for anyone who missed Greek class. Family with Operator's "Serif" DNA.</p>
-      <span class="tag">Cormorant Garamond</span><span class="tag">premium/quiet</span><span class="tag">phrase-mark friendly</span>
-    </div>
+  <div class="meta">
+    <h3>03 · Survival row — 128 / 64 / 32 / 16 px</h3>
+    <p>The Opus test: no wordmark survives 16px — nobody's does — so the icon carries the brand on the dusty cracked screen. Thick ring + solid stop, the two primitives that embroider as satin stitch on the hi-vis polo. This row is printed at actual size on the phone; if the 16px square still reads, the mark is done.</p>
+    <span class="tag">app icon</span><span class="tag">favicon</span><span class="tag">hi-vis embroidery</span>
   </div>
-
 </div>
 
-<!-- TYPE PAIRINGS -->
-<div class="pair">
-  <h3>Recommended pairing — "Engineering honesty"</h3>
-  <div class="sm">Wordmark / headings</div>
-  <div class="specimen" style="font-family:'Space Grotesk',sans-serif; font-weight:700; letter-spacing:.12em;">SPACE GROTESK — the hyphen is the logo</div>
-  <div class="sm" style="margin-top:22px;">Receipts / data / buttons</div>
-  <div class="specimen" style="font-family:'IBM Plex Mono',monospace; font-size:30px;">IBM PLEX MONO — $3,520.00 · LOOP OPEN</div>
-  <div class="sm" style="margin-top:22px;">Body</div>
-  <div class="bodyline" style="font-family:'Inter',sans-serif;">Inter — already the house body face from El Vaquero, reads at arm's length on a dusty phone screen, and costs nothing. Three faces, clear jobs, no decoration.</div>
+<!-- B&W FILING SHEET -->
+<div class="card">
+  <div class="stage black" style="gap:60px;">
+    <svg width="150" height="150" viewBox="0 0 88 88" fill="none">
+      <path d="M 55.63 12.05 A 34 34 0 1 1 32.37 12.05" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="32.37" cy="12.05" r="7" fill="#fff"/>
+      <text x="44" y="82" text-anchor="middle" fill="#fff" font-family="Archivo" font-weight="800" font-size="11" letter-spacing="2">T-ELOS</text>
+    </svg>
+    <svg width="150" height="150" viewBox="0 0 88 88" fill="none">
+      <path d="M 55.63 12.05 A 34 34 0 1 1 32.37 12.05" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="32.37" cy="12.05" r="7" fill="#fff"/>
+    </svg>
+  </div>
+  <div class="meta">
+    <h3>04 · Filing sheet — black &amp; white, no colour claim</h3>
+    <p>Trademarks file in monochrome: protection covers <em>any</em> colour then. Left = the composite lockup (device + wordmark), right = the device alone — both get filed, per Opus. The application goes in with a narrow goods description (construction project management software, cl. 9; SaaS for construction trades, cl. 42) and the small-claim fee path.</p>
+    <span class="tag">composite + device, both filed</span><span class="tag">no colour claim</span><span class="tag">narrow goods description</span>
+  </div>
 </div>
 
+<!-- PALETTE -->
 <div class="pair">
-  <h3>Alternate pairing — "The office that won"</h3>
-  <div class="specimen" style="font-family:'Cormorant Garamond',serif; font-weight:600; letter-spacing:.18em;">Baskerville blood, serif voice</div>
-  <div class="bodyline">If T-elos should feel like it belongs beside Operator — quiet, expensive, built to last — the serif route (Baskerville or Cormorant for the wordmark) makes them look like one family of tools. Trade-off: a serif wordmark is less "machine" and more "firm."</div>
-</div>
-
-<div class="pair">
-  <h3>Palette — the bronze and the ink</h3>
+  <h3>Palette — corrected naming, contrast law included</h3>
   <div class="sw">
-    <div style="background:#12151C; color:#8A8F9A;">INK · #12151C</div>
-    <div style="background:#C9975B; color:#12151C;">BRONZE · #C9975B</div>
-    <div style="background:#8F6B3E; color:#F2EDE4;">PATINA · #8F6B3E</div>
-    <div style="background:#5E8B7E; color:#12151C;">VERDIGRIS · #5E8B7E</div>
-    <div style="background:#F2EDE4; color:#12151C;">BONE · #F2EDE4</div>
+    <div style="background:#12151C; color:#8A8F9A;">INK<br>#12151C</div>
+    <div style="background:#C9975B; color:#12151C;">BRONZE<br>#C9975B</div>
+    <div style="background:#8F6B3E; color:#F2EDE4;">DARK BRONZE<br>#8F6B3E</div>
+    <div style="background:#5E8B7E; color:#12151C;">VERDIGRIS — STATE ONLY<br>#5E8B7E</div>
+    <div style="background:#F2EDE4; color:#12151C;">BONE<br>#F2EDE4</div>
   </div>
-  <div class="bodyline">Bronze because Talos was bronze — the guardian that walked the perimeter. Ink so the bronze earns its place. Bone for paper and quotes. Verdigris as the rare accent for "loop closed." Nothing else.</div>
+  <div class="warn">
+    <div class="bodyline" style="margin-top:0">
+      <strong>Contrast law (both reviewers):</strong> bronze-on-ink ≈ 7:1 — the hero pairing. <strong>Never set bronze text on bone</strong> (≈2.2:1, fails). Dark Bronze #8F6B3E keeps its name (v1's "patina" clash is dead — verdigris is the green). <strong>Verdigris is demoted to state color only</strong>: "loop closed", always paired with an icon or label for colour-blind tradies. Bronze is the one must-keep both heads agreed on — the Talos story in one hex code.
+    </div>
+  </div>
+</div>
+
+<!-- TYPE -->
+<div class="pair">
+  <h3>Type — final trio</h3>
+  <div class="sm">Wordmark / headings</div>
+  <div class="specimen" style="font-family:'Archivo',sans-serif; font-weight:800; font-size:42px; letter-spacing:.10em;">ARCHIVO — stencilled site signage, not a web3 deck</div>
+  <div class="sm" style="margin-top:22px;">Receipts / money / states</div>
+  <div class="specimen" style="font-family:'IBM Plex Mono',monospace; font-size:28px;">IBM PLEX MONO — $3,520.00 · LOOP OPEN</div>
+  <div class="sm" style="margin-top:22px;">Body</div>
+  <div class="bodyline">Inter — body stays (both heads kept it). Space Grotesk is <strong>cut</strong>: the house face of a thousand crypto landing pages (Opus). The serif route is cut from this brand and stays with the Operator family. Three faces, three jobs.</div>
+</div>
+
+<!-- OPEN QUESTIONS -->
+<div class="open">
+  <h3>Open question — the sound problem (Opus, uncomfortable truth)</h3>
+  <p class="bodyline" style="margin-top:8px">Spoken aloud, "T-ELOS" <em>is</em> "TELOS" — and Australian deceptive-similarity law weighs sound heavily. Punctuation is near-invisible to an examiner. The device improves the odds; it does not guarantee registration while a rival owns the bare word in class 9. Before artwork spend: a clearance opinion (~$300–600) and a hard look at adding a distinguishing word element to the name. The register gave us the company; the trademark still has to be earned.</p>
 </div>
 
 </body>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Operator — STATUS</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:560px; height:1120px; overflow:hidden;
+    font-family:-apple-system,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+    background:#151719; color:#F4F0E8; }
+  #frame { position:relative; width:560px; height:1120px; background:#151719; }
+
+  /* ---------- phone chrome (matches TALK v1) ---------- */
+  #statusbar { position:absolute; top:0; left:0; width:560px; height:54px;
+    display:flex; justify-content:space-between; align-items:center; padding:0 34px; }
+  #sb-time { font-size:19px; font-weight:600; letter-spacing:.3px; color:#F4F0E8; }
+  #sb-icons { display:flex; gap:9px; align-items:flex-end; height:20px; }
+  .bar { width:4px; background:#F4F0E8; border-radius:1px; display:inline-block; }
+  .batt { width:27px; height:13px; border:1.6px solid rgba(244,240,232,.65); border-radius:4px; position:relative; }
+  .batt::before { content:""; position:absolute; inset:2px; right:7px; background:#F4F0E8; border-radius:1.5px; }
+  .batt::after { content:""; position:absolute; right:-4.5px; top:3.5px; width:2.5px; height:5px; background:rgba(244,240,232,.65); border-radius:0 2px 2px 0; }
+
+  /* ---------- header strip ---------- */
+  #header { position:absolute; top:58px; left:26px; width:508px; height:96px;
+    background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+    border:1px solid rgba(244,240,232,.14); border-radius:8px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+    padding:15px 18px; }
+  .h-row { display:flex; justify-content:space-between; align-items:center; }
+  .label { font-size:13px; font-weight:700; letter-spacing:2.2px; text-indent:2.2px;
+    text-transform:uppercase; color:#B8B3AA; }
+  #conn { display:flex; align-items:center; gap:9px; }
+  .dot { width:9px; height:9px; border-radius:50%; background:#84C896;
+    box-shadow:0 0 8px rgba(132,200,150,.7); }
+  #conn-txt { font-size:14px; font-weight:700; letter-spacing:2.2px; text-indent:2.2px; color:#84C896; }
+  #loc-row { margin-top:13px; display:flex; justify-content:space-between; align-items:baseline; }
+  #loc-main { font-size:22px; font-weight:650; color:#F4F0E8; font-variant-numeric:tabular-nums; }
+  #loc-main .brass { color:#D2B17A; }
+  #loc-age { font-size:13px; color:#A39D93; letter-spacing:.4px; font-variant-numeric:tabular-nums; }
+
+  .stamp { font-size:11px; font-weight:700; letter-spacing:2.2px; text-indent:2.2px;
+    text-transform:uppercase; color:#948E85; margin:4px 2px 10px; }
+
+  /* ---------- hero tally ---------- */
+  #tally { position:absolute; top:192px; left:26px; width:508px; height:130px;
+    padding:16px 20px 14px;
+    background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+    border:1px solid rgba(244,240,232,.14); border-radius:8px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12); }
+  .tally-row { display:flex; justify-content:space-between; align-items:baseline; }
+  #tally-num { font-size:46px; font-weight:800; color:#D2B17A; letter-spacing:.5px;
+    font-variant-numeric:tabular-nums; line-height:1.05; }
+  #tally-num .of { font-size:20px; font-weight:650; color:#A39D93; letter-spacing:.5px; }
+  #tally-pct { font-size:13px; font-weight:700; letter-spacing:2.2px; text-indent:2.2px; color:#84C896; }
+  #track { margin-top:10px; height:10px; border-radius:5px; background:rgba(244,240,232,.08);
+    border:1px solid rgba(244,240,232,.10); overflow:hidden; }
+  #fill { height:100%; width:43.5%; border-radius:5px;
+    background:linear-gradient(90deg, #9C7B45, #D2B17A 70%, #EFD3A0); }
+  #tally-meta { margin-top:9px; display:flex; justify-content:space-between; align-items:center; }
+
+  /* ---------- section cards ---------- */
+  .sect { position:absolute; left:26px; width:508px;
+    padding:13px 18px 11px;
+    background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+    border:1px solid rgba(244,240,232,.14); border-radius:8px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12); }
+  .sect-head { display:flex; justify-content:space-between; align-items:center;
+    padding-bottom:9px; border-bottom:1px solid rgba(244,240,232,.12); }
+  .sect-name { display:flex; align-items:center; gap:10px; }
+  .sdot { width:9px; height:9px; border-radius:50%; }
+  .sdot.live { background:#84C896; box-shadow:0 0 8px rgba(132,200,150,.7); }
+  .sdot.out { background:#D2B17A; box-shadow:0 0 8px rgba(210,177,122,.55); }
+  .sdot.cook { background:#8A857C; }
+  .sdot.word { background:#EFD3A0; box-shadow:0 0 8px rgba(239,211,160,.6); }
+  .sect-name .label { color:#B8B3AA; }
+  .sect-count { font-size:12px; font-weight:700; letter-spacing:1.6px; text-indent:1.6px;
+    color:#8A857C; font-variant-numeric:tabular-nums; }
+  .row { display:flex; justify-content:space-between; align-items:baseline;
+    padding:8px 0 0; }
+  .row + .row { padding-top:9px; }
+  .row-main { font-size:17px; font-weight:600; color:#F4F0E8; }
+  .row-main .sub { color:#A39D93; font-weight:500; }
+  .row-meta { font-size:12px; font-weight:700; letter-spacing:1.4px; text-indent:1.4px;
+    text-transform:uppercase; color:#948E85; font-variant-numeric:tabular-nums;
+    white-space:nowrap; padding-left:14px; }
+  .row-meta.hot { color:#D2B17A; }
+  .row-meta.ok { color:#84C896; }
+
+  /* ---------- tab bar (matches TALK v1) ---------- */
+  #tabbar { position:absolute; top:930px; left:0; width:560px; height:132px;
+    background:rgba(36,40,43,.92); border-top:1px solid rgba(244,240,232,.10);
+    display:flex; justify-content:space-evenly; align-items:flex-start; padding-top:16px; }
+  .tab { width:96px; text-align:center; }
+  .tab .glyph { position:relative; width:30px; height:30px; margin:0 auto 8px; }
+  .tab .name { font-size:11px; font-weight:750; letter-spacing:2.2px; text-indent:2.2px;
+    text-transform:uppercase; color:#8A857C; }
+  .tab.active .name { color:#D2B17A; }
+  .g-talk .caps { position:absolute; left:8px; top:1px; width:14px; height:18px;
+    background:#8A857C; border-radius:7px 7px 4px 4px; }
+  .g-talk .arc { position:absolute; left:4px; top:12px; width:22px; height:13px;
+    border:3.5px solid #8A857C; border-top:none; border-radius:0 0 13px 13px; }
+  .g-talk .stem { position:absolute; left:13px; top:25px; width:3.5px; height:5px; background:#8A857C; }
+  .g-draw .d { position:absolute; left:2px; width:26px; height:8px; border-radius:2.5px;
+    background:#8A857C; }
+  .g-draw .h { position:absolute; left:13px; width:4px; height:2.5px; border-radius:1.5px; background:#24282B; }
+  .g-draw .d1 { top:2px; } .g-draw .h1 { top:4.8px; }
+  .g-draw .d2 { top:11px; } .g-draw .h2 { top:13.8px; }
+  .g-draw .d3 { top:20px; } .g-draw .h3 { top:22.8px; }
+  .g-stat .ring { position:absolute; inset:2px; border:3.5px solid #D2B17A; border-radius:50%; }
+  .g-stat .needle { position:absolute; left:9px; top:5px; width:7px; height:19px;
+    background:#D2B17A; clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%); transform:rotate(38deg); }
+  .g-boys .m1 { position:absolute; left:0px; top:2px; width:18px; height:14px;
+    border-radius:5px; background:#8A857C; }
+  .g-boys .m1::after { content:""; position:absolute; left:3px; bottom:-4px; width:0; height:0;
+    border-left:7px solid #8A857C; border-bottom:5px solid transparent; }
+  .g-boys .m2 { position:absolute; left:11px; top:13px; width:18px; height:14px;
+    border-radius:5px; background:#B0AA9F; }
+  .g-boys .m2::after { content:""; position:absolute; right:3px; bottom:-4px; width:0; height:0;
+    border-right:7px solid #B0AA9F; border-bottom:5px solid transparent; }
+
+  #home-ind { position:absolute; top:1090px; left:50%; transform:translateX(-50%);
+    width:140px; height:5px; border-radius:3px; background:rgba(244,240,232,.35); }
+</style>
+</head>
+<body>
+<div id="frame">
+
+  <div id="statusbar">
+    <div id="sb-time">2:47</div>
+    <div id="sb-icons">
+      <span class="bar" style="height:6px"></span><span class="bar" style="height:9px"></span>
+      <span class="bar" style="height:12px"></span><span class="bar" style="height:15px"></span>
+      <span class="batt"></span>
+    </div>
+  </div>
+
+  <div id="header">
+    <div class="h-row">
+      <div id="conn"><span class="dot"></span><span id="conn-txt">RANCH ONLINE · WHISPER LIVE</span></div>
+      <div class="label">SAT 3:47 AM</div>
+    </div>
+    <div id="loc-row">
+      <div id="loc-main"><span class="brass">On the tools</span> · Compark Circuit</div>
+      <div id="loc-age">NIGHT SHIFT · LIVE</div>
+    </div>
+  </div>
+
+  <div style="position:absolute; top:172px; left:26px; width:508px;">
+    <div class="stamp" style="margin:0 0 8px 2px">WHAT'S CRACKING · SAT 12 OCT</div>
+  </div>
+
+  <div id="tally">
+    <div class="tally-row">
+      <div id="tally-num">87<span class="of"> / 200 m² CHIPPED</span></div>
+      <div id="tally-pct">ON TRACK</div>
+    </div>
+    <div id="track"><div id="fill"></div></div>
+    <div id="tally-meta">
+      <div class="stamp" style="margin:0; color:#B8B3AA">WAVERLEY — NIGHT 1 · 21:00 START</div>
+      <div class="stamp" style="margin:0; color:#B8B3AA">CALLED OUT BY VOICE</div>
+    </div>
+  </div>
+
+  <div class="sect" style="top:334px; height:140px">
+    <div class="sect-head">
+      <div class="sect-name"><span class="sdot live"></span><span class="label">RUNNING</span></div>
+      <div class="sect-count">3 LIVE</div>
+    </div>
+    <div class="row">
+      <div class="row-main">Waverley chip-out <span class="sub">· night 1</span></div>
+      <div class="row-meta ok">87 m² LOGGED</div>
+    </div>
+    <div class="row">
+      <div class="row-main">Proton relay <span class="sub">· mail bridge</span></div>
+      <div class="row-meta ok">EVERY 7 MIN</div>
+    </div>
+    <div class="row">
+      <div class="row-main">BJM watch <span class="sub">· payment-claim trap</span></div>
+      <div class="row-meta">QUIET SINCE 9:43</div>
+    </div>
+  </div>
+
+  <div class="sect" style="top:486px; height:140px">
+    <div class="sect-head">
+      <div class="sect-name"><span class="sdot out"></span><span class="label">OUT THE DOOR — CHASING</span></div>
+      <div class="sect-count">3 OUT</div>
+    </div>
+    <div class="row">
+      <div class="row-main">Somerville → BJM <span class="sub">· final demand</span></div>
+      <div class="row-meta hot">$14,117 · FRI 23</div>
+    </div>
+    <div class="row">
+      <div class="row-main">Metro → statement <span class="sub">· M183978</span></div>
+      <div class="row-meta">ASKED OCT 2</div>
+    </div>
+    <div class="row">
+      <div class="row-main">Shaun's Floors <span class="sub">· payment plan</span></div>
+      <div class="row-meta ok">$2K BANKED</div>
+    </div>
+  </div>
+
+  <div class="sect" style="top:638px; height:140px">
+    <div class="sect-head">
+      <div class="sect-name"><span class="sdot cook"></span><span class="label">COOKING</span></div>
+      <div class="sect-count">3 ON THE FIRE</div>
+    </div>
+    <div class="row">
+      <div class="row-main">Brown Hill Stage 2 <span class="sub">· quote amended</span></div>
+      <div class="row-meta">WAITING SHEETS</div>
+    </div>
+    <div class="row">
+      <div class="row-main">Bickerton Island <span class="sub">· 20-day breakdown</span></div>
+      <div class="row-meta">READY TO SEND</div>
+    </div>
+    <div class="row">
+      <div class="row-main">Oriental Merchant <span class="sub">· GF install plan</span></div>
+      <div class="row-meta">STAGED</div>
+    </div>
+  </div>
+
+  <div class="sect" style="top:790px; height:140px">
+    <div class="sect-head">
+      <div class="sect-name"><span class="sdot word"></span><span class="label">NEEDS YOUR WORD</span></div>
+      <div class="sect-count">3 QUEUED</div>
+    </div>
+    <div class="row">
+      <div class="row-main">Zac confirmation <span class="sub">· locks the terms</span></div>
+      <div class="row-meta hot">DRAFTED V3</div>
+    </div>
+    <div class="row">
+      <div class="row-main">LS-0002 → Sarge <span class="sub">· Fisher list</span></div>
+      <div class="row-meta hot">$2,000 READY</div>
+    </div>
+    <div class="row">
+      <div class="row-main">Proton Duo <span class="sub">· the switch</span></div>
+      <div class="row-meta hot">SAY GO</div>
+    </div>
+  </div>
+
+  <div id="tabbar">
+    <div class="tab">
+      <div class="glyph g-talk"><div class="caps"></div><div class="arc"></div><div class="stem"></div></div>
+      <div class="name">TALK</div>
+    </div>
+    <div class="tab">
+      <div class="glyph g-draw">
+        <div class="d d1"></div><div class="h h1"></div>
+        <div class="d d2"></div><div class="h h2"></div>
+        <div class="d d3"></div><div class="h h3"></div>
+      </div>
+      <div class="name">DRAWERS</div>
+    </div>
+    <div class="tab active">
+      <div class="glyph g-stat"><div class="ring"></div><div class="needle"></div></div>
+      <div class="name">STATUS</div>
+    </div>
+    <div class="tab">
+      <div class="glyph g-boys"><div class="m1"></div><div class="m2"></div></div>
+      <div class="name">THE BOYS</div>
+    </div>
+  </div>
+
+  <div id="home-ind"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Operator — Home (TALK)</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:560px; height:1120px; overflow:hidden;
+    font-family:-apple-system,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+    background:#151719; color:#F4F0E8; }
+  #frame { position:relative; width:560px; height:1120px; background:#151719; }
+
+  /* ---------- phone chrome ---------- */
+  #statusbar { position:absolute; top:0; left:0; width:560px; height:54px;
+    display:flex; justify-content:space-between; align-items:center; padding:0 34px; }
+  #sb-time { font-size:19px; font-weight:600; letter-spacing:.3px; color:#F4F0E8; }
+  #sb-icons { display:flex; gap:9px; align-items:flex-end; height:20px; }
+  .bar { width:4px; background:#F4F0E8; border-radius:1px; display:inline-block; }
+  .batt { width:27px; height:13px; border:1.6px solid rgba(244,240,232,.65); border-radius:4px; position:relative; }
+  .batt::before { content:""; position:absolute; inset:2px; right:7px; background:#F4F0E8; border-radius:1.5px; }
+  .batt::after { content:""; position:absolute; right:-4.5px; top:3.5px; width:2.5px; height:5px; background:rgba(244,240,232,.65); border-radius:0 2px 2px 0; }
+
+  /* ---------- header strip ---------- */
+  #header { position:absolute; top:58px; left:26px; width:508px; height:96px;
+    background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+    border:1px solid rgba(244,240,232,.14); border-radius:8px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+    padding:15px 18px; }
+  .h-row { display:flex; justify-content:space-between; align-items:center; }
+  .label { font-size:13px; font-weight:700; letter-spacing:2.2px; text-indent:2.2px;
+    text-transform:uppercase; color:#B8B3AA; }
+  #conn { display:flex; align-items:center; gap:9px; }
+  .dot { width:9px; height:9px; border-radius:50%; background:#84C896;
+    box-shadow:0 0 8px rgba(132,200,150,.7); }
+  #conn-txt { font-size:14px; font-weight:700; letter-spacing:2.2px; text-indent:2.2px; color:#84C896; }
+  #loc-row { margin-top:13px; display:flex; justify-content:space-between; align-items:baseline; }
+  #loc-main { font-size:22px; font-weight:650; color:#F4F0E8; font-variant-numeric:tabular-nums; }
+  #loc-main .brass { color:#D2B17A; }
+  #loc-age { font-size:13px; color:#A39D93; letter-spacing:.4px; font-variant-numeric:tabular-nums; }
+
+  /* ---------- conversation ---------- */
+  #convo { position:absolute; top:172px; left:26px; width:508px; height:556px; }
+  .stamp { font-size:11px; font-weight:700; letter-spacing:2.2px; text-indent:2.2px;
+    text-transform:uppercase; color:#948E85; margin:4px 2px 10px; }
+  .op-bubble { position:relative; width:418px; margin-left:90px; padding:16px 18px;
+    background:rgba(210,177,122,.13); border:1px solid rgba(210,177,122,.38);
+    border-radius:8px; font-size:20px; line-height:1.45; color:#F4F0E8; }
+  .cow-panel { position:relative; width:468px; margin-top:16px; padding:18px 20px 16px;
+    background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+    border:1px solid rgba(244,240,232,.14); border-radius:8px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12); }
+  .cow-name { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .cow-badge { width:26px; height:26px; border-radius:6px;
+    background:linear-gradient(160deg,#D2B17A,#9C7B45);
+    box-shadow: inset 0 1px 2px rgba(255,255,255,.4), inset 0 -2px 4px rgba(0,0,0,.28); }
+  .cow-name .label { color:#D2B17A; }
+  .cow-body { font-size:20px; line-height:1.5; color:#F4F0E8; }
+  .cow-body .num { font-size:30px; font-weight:750; font-variant-numeric:tabular-nums;
+    color:#D2B17A; letter-spacing:.5px; }
+  .cow-meta { margin-top:12px; padding-top:12px; border-top:1px solid rgba(244,240,232,.12);
+    display:flex; gap:9px; align-items:center; }
+  .chip { font-size:11px; font-weight:700; letter-spacing:2.2px; text-indent:2.2px;
+    text-transform:uppercase; padding:6px 10px; border-radius:5px; }
+  .chip.done { background:rgba(132,200,150,.14); color:#84C896; border:1px solid rgba(132,200,150,.35); }
+  .chip.wait { background:rgba(210,177,122,.16); color:#D2B17A; border:1px solid rgba(210,177,122,.5); }
+  .chip.dim { background:rgba(244,240,232,.05); color:#8A857C; border:1px solid rgba(244,240,232,.10); }
+  .chip-sep { color:#7A7469; font-size:13px; font-weight:700; }
+  .cow-actions { margin-top:14px; display:flex; align-items:center; gap:16px; }
+  #confirm-btn { position:relative; overflow:hidden;
+    flex:1; height:58px; border:none; border-radius:8px;
+    background:radial-gradient(120% 120% at 30% 25%, #EFD3A0 0%, #D2B17A 55%, #9C7B45 100%);
+    box-shadow: 0 18px 40px rgba(210,177,122,.35), inset 0 2px 6px rgba(255,255,255,.45),
+      inset 0 -8px 18px rgba(0,0,0,.18);
+    color:#241D12; font-size:17px; font-weight:800; letter-spacing:3px;
+    text-indent:3px; line-height:58px; padding:0 0 0 6px; }
+  #confirm-btn::before { content:""; position:absolute; left:10px; right:10px; top:2px;
+    height:45%; border-radius:7px 7px 22px 22px;
+    background:linear-gradient(180deg, rgba(255,255,255,.62) 0%, rgba(255,255,255,.18) 55%, rgba(255,255,255,0) 100%); }
+  .text-act { height:58px; display:flex; align-items:center; font-size:15px; font-weight:650;
+    color:#B8B3AA; letter-spacing:.3px; }
+  .heard { margin-top:6px; display:flex; gap:12px; align-items:center; }
+  .wave { display:flex; gap:3px; align-items:flex-end; height:16px; }
+  .wave i { width:3px; background:#8A857C; border-radius:1px; display:block; }
+
+  /* ---------- bottom dock ---------- */
+  #ptt-zone { position:absolute; top:748px; left:26px; width:508px; height:150px; }
+  #ptt { position:absolute; top:0; left:0; width:508px; height:86px; border:none; border-radius:12px;
+    overflow:hidden;
+    background:radial-gradient(120% 120% at 30% 25%, #EFD3A0 0%, #D2B17A 55%, #9C7B45 100%);
+    box-shadow: 0 18px 40px rgba(210,177,122,.35), inset 0 2px 6px rgba(255,255,255,.45),
+      inset 0 -8px 18px rgba(0,0,0,.18);
+    display:flex; align-items:center; justify-content:center; gap:18px; }
+  #ptt::before { content:""; position:absolute; left:14px; right:14px; top:3px;
+    height:42%; border-radius:10px 10px 30px 30px;
+    background:linear-gradient(180deg, rgba(255,255,255,.62) 0%, rgba(255,255,255,.18) 55%, rgba(255,255,255,0) 100%); }
+  #ptt .mic { position:relative; width:38px; height:38px; }
+  #ptt .mic .caps { position:absolute; left:11px; top:1px; width:16px; height:23px;
+    background:#241D12; border-radius:8px 8px 5px 5px; }
+  #ptt .mic .arc { position:absolute; left:5px; top:15px; width:28px; height:17px;
+    border:4.5px solid #241D12; border-top:none; border-radius:0 0 16px 16px; }
+  #ptt .mic .stem { position:absolute; left:17px; top:32px; width:4.5px; height:6px; background:#241D12; }
+  #ptt-txt { position:relative; z-index:1; color:#241D12; font-size:22px; font-weight:850;
+    letter-spacing:3px; text-indent:3px; }
+  #convo-toggle { position:absolute; top:104px; left:0; width:508px; height:50px;
+    background:rgba(244,240,232,.05); border:1px solid rgba(244,240,232,.14); border-radius:8px;
+    display:flex; align-items:center; justify-content:space-between; padding:0 18px; }
+  #convo-toggle .label { color:#B8B3AA; }
+  .toggle { width:52px; height:30px; border-radius:15px; background:rgba(210,177,122,.22);
+    border:1px solid rgba(210,177,122,.38); position:relative; }
+  .toggle::after { content:""; position:absolute; top:2.5px; left:3px; width:23px; height:23px;
+    border-radius:50%; background:#B8B3AA;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,.35), 0 2px 4px rgba(0,0,0,.3); }
+
+  /* ---------- tab bar ---------- */
+  #tabbar { position:absolute; top:930px; left:0; width:560px; height:132px;
+    background:rgba(36,40,43,.92); border-top:1px solid rgba(244,240,232,.10);
+    display:flex; justify-content:space-evenly; align-items:flex-start; padding-top:16px; }
+  .tab { width:96px; text-align:center; }
+  .tab .glyph { position:relative; width:30px; height:30px; margin:0 auto 8px; }
+  .tab .name { font-size:11px; font-weight:750; letter-spacing:2.2px; text-indent:2.2px;
+    text-transform:uppercase; color:#8A857C; }
+  .tab.active .name { color:#D2B17A; }
+  /* talk glyph: bold mic */
+  .g-talk .caps { position:absolute; left:8px; top:1px; width:14px; height:18px;
+    background:#D2B17A; border-radius:7px 7px 4px 4px; }
+  .g-talk .arc { position:absolute; left:4px; top:12px; width:22px; height:13px;
+    border:3.5px solid #D2B17A; border-top:none; border-radius:0 0 13px 13px; }
+  .g-talk .stem { position:absolute; left:13px; top:25px; width:3.5px; height:5px; background:#D2B17A; }
+  /* drawers glyph: cabinet rows with handles */
+  .g-draw .d { position:absolute; left:2px; width:26px; height:8px; border-radius:2.5px;
+    background:#8A857C; }
+  .g-draw .h { position:absolute; left:13px; width:4px; height:2.5px; border-radius:1.5px; background:#24282B; }
+  .g-draw .d1 { top:2px; } .g-draw .h1 { top:4.8px; }
+  .g-draw .d2 { top:11px; } .g-draw .h2 { top:13.8px; }
+  .g-draw .d3 { top:20px; } .g-draw .h3 { top:22.8px; }
+  /* status glyph: compass */
+  .g-stat .ring { position:absolute; inset:2px; border:3.5px solid #8A857C; border-radius:50%; }
+  .g-stat .needle { position:absolute; left:9px; top:5px; width:7px; height:19px;
+    background:#8A857C; clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%); transform:rotate(38deg); }
+  /* boys glyph: speech bubbles */
+  .g-boys .m1 { position:absolute; left:0px; top:2px; width:18px; height:14px;
+    border-radius:5px; background:#8A857C; }
+  .g-boys .m1::after { content:""; position:absolute; left:3px; bottom:-4px; width:0; height:0;
+    border-left:7px solid #8A857C; border-bottom:5px solid transparent; }
+  .g-boys .m2 { position:absolute; left:11px; top:13px; width:18px; height:14px;
+    border-radius:5px; background:#B0AA9F; }
+  .g-boys .m2::after { content:""; position:absolute; right:3px; bottom:-4px; width:0; height:0;
+    border-right:7px solid #B0AA9F; border-bottom:5px solid transparent; }
+
+  /* home indicator */
+  #home-ind { position:absolute; top:1090px; left:50%; transform:translateX(-50%);
+    width:140px; height:5px; border-radius:3px; background:rgba(244,240,232,.35); }
+</style>
+</head>
+<body>
+<div id="frame">
+
+  <div id="statusbar">
+    <div id="sb-time">2:47</div>
+    <div id="sb-icons">
+      <span class="bar" style="height:6px"></span><span class="bar" style="height:9px"></span>
+      <span class="bar" style="height:12px"></span><span class="bar" style="height:15px"></span>
+      <span class="batt"></span>
+    </div>
+  </div>
+
+  <div id="header">
+    <div class="h-row">
+      <div id="conn"><span class="dot"></span><span id="conn-txt">RANCH ONLINE · WHISPER LIVE</span></div>
+      <div class="label">SAT 3:47 AM</div>
+    </div>
+    <div id="loc-row">
+      <div id="loc-main"><span class="brass">12 min</span> from home · Swan Hill run</div>
+      <div id="loc-age">FIXED 2 MIN AGO</div>
+    </div>
+  </div>
+
+  <div id="convo">
+    <div class="stamp">TONIGHT · SAT 12 OCT</div>
+    <div class="op-bubble">Invoice Richie for the Swan Hill final — the twenty days plus the extra prep.</div>
+
+    <div class="cow-panel">
+      <div class="cow-name"><div class="cow-badge"></div><div class="label">COWBOY · DRAFTED</div></div>
+      <div class="cow-body">
+        Drafted from the Sep 28 breakdown: 20 days at $520/day plus $1,480 prep —
+        <span class="num">$12,480</span> incl GST to Richie Norton (FXC). Read-back:
+        that's <b>twelve thousand, four hundred and eighty</b>. Say the word and it goes.
+      </div>
+      <div class="heard">
+        <div class="wave">
+          <i style="height:6px"></i><i style="height:11px"></i><i style="height:16px"></i>
+          <i style="height:9px"></i><i style="height:13px"></i><i style="height:5px"></i>
+          <i style="height:10px"></i>
+        </div>
+        <div class="stamp" style="margin:0">VOICE SNIP · 0:04 · HEARD ✓</div>
+      </div>
+      <div class="cow-meta">
+        <span class="chip done">HEARD ✓</span><span class="chip-sep">→</span>
+        <span class="chip done">DRAFTED ✓</span><span class="chip-sep">→</span>
+        <span class="chip wait">NEEDS YOUR WORD</span><span class="chip-sep">→</span>
+        <span class="chip dim">SENT</span>
+      </div>
+      <div class="cow-actions">
+        <button id="confirm-btn"><span style="position:relative; z-index:1">CONFIRM &amp; SEND</span></button>
+        <div class="text-act">Correct it</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="ptt-zone">
+    <button id="ptt">
+      <div class="mic"><div class="caps"></div><div class="arc"></div><div class="stem"></div></div>
+      <div id="ptt-txt">HOLD TO TALK</div>
+    </button>
+    <div id="convo-toggle">
+      <div class="label">CONVERSATION MODE</div>
+      <div class="toggle"></div>
+    </div>
+  </div>
+
+  <div id="tabbar">
+    <div class="tab active">
+      <div class="glyph g-talk"><div class="caps"></div><div class="arc"></div><div class="stem"></div></div>
+      <div class="name">TALK</div>
+    </div>
+    <div class="tab">
+      <div class="glyph g-draw">
+        <div class="d d1"></div><div class="h h1"></div>
+        <div class="d d2"></div><div class="h h2"></div>
+        <div class="d d3"></div><div class="h h3"></div>
+      </div>
+      <div class="name">DRAWERS</div>
+    </div>
+    <div class="tab">
+      <div class="glyph g-stat"><div class="ring"></div><div class="needle"></div></div>
+      <div class="name">STATUS</div>
+    </div>
+    <div class="tab">
+      <div class="glyph g-boys"><div class="m1"></div><div class="m2"></div></div>
+      <div class="name">THE BOYS</div>
+    </div>
+  </div>
+
+  <div id="home-ind"></div>
+</div>
+</body>
+</html>

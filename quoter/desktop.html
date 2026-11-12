@@ -1,0 +1,156 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="v2.css">
+<style>
+html,body { width:1440px; height:900px; overflow:hidden; }
+.app { position:absolute; inset:0; display:flex; padding:26px; gap:22px; }
+.rail { width:286px; flex:0 0 auto; display:flex; flex-direction:column; gap:13px; }
+.main { flex:1; display:flex; flex-direction:column; gap:12px; min-width:0; }
+.gatep { width:368px; flex:0 0 auto; display:flex; flex-direction:column; gap:12px; }
+.mrow { display:flex; align-items:center; padding:0 20px; height:52px; gap:14px; }
+.mrow .nm { font-size:14.5px; font-weight:600; }
+.mrow .sub { font-size:8.5px; letter-spacing:.2em; text-indent:.2em; text-transform:uppercase; color:rgba(216,203,182,.72); margin-top:2px; }
+.col { width:74px; text-align:right; font-size:12.5px; color:#D8CBB6; font-variant-numeric:tabular-nums; }
+.amt2 { width:96px; text-align:right; font-family:'Bitter',serif; font-weight:800; font-size:16px; font-variant-numeric:tabular-nums; }
+.mini-card { display:flex; align-items:center; gap:12px; padding:13px 16px; border-radius:14px; }
+.mini-card .nm { font-size:13px; font-weight:600; }
+.mini-card .sub { font-size:8px; letter-spacing:.2em; text-indent:.2em; text-transform:uppercase; color:rgba(216,203,182,.72); margin-top:2px; }
+.check-row { display:flex; align-items:center; height:56px; padding:0 18px; gap:12px; }
+</style></head><body>
+<div class="scene"></div>
+<div class="app">
+
+  <div class="rail">
+    <div style="display:flex; align-items:center; gap:12px; margin:2px 4px 6px;">
+      <svg width="30" height="27" viewBox="0 0 120 110"><g fill="#A67C2E"><path d="M18 18 L36 18 L60 66 L84 18 L102 18 L68 92 L52 92 Z"/><rect x="17" y="12" width="20" height="6" rx="1"/><rect x="83" y="12" width="20" height="6" rx="1"/></g></svg>
+      <div><div class="caps brass" style="font-size:10px;">Vaquero · Quoter</div>
+      <div class="muted" style="font-size:8px; letter-spacing:.28em; text-indent:.28em; margin-top:3px; text-transform:uppercase;">The one that remembers</div></div>
+    </div>
+    <div class="btn" style="position:static; width:100%; height:52px; font-size:13px;">+ New quote</div>
+    <div class="sec" style="margin:6px 4px 0;"><span class="caps" style="font-size:8px;">Active</span><span class="line"></span></div>
+    <div class="mini-card card" style="border-color:rgba(226,185,108,.5);">
+      <div><div class="nm">Hawthorn — fitout</div><div class="sub">Commercial · 420m²</div></div>
+      <div style="margin-left:auto; text-align:right;"><div class="num" style="font-size:15px;">$38,420</div>
+      <div class="badge hot" style="width:22px;height:22px;font-size:11px; margin:5px 0 0 auto;">1</div></div>
+    </div>
+    <div class="mini-card card"><div><div class="nm">Bayswater dental</div><div class="sub">Health · after hours</div></div>
+      <div style="margin-left:auto; text-align:right;"><div class="num" style="font-size:15px;">$14,980</div>
+      <div class="badge zero" style="width:22px;height:22px;font-size:11px; margin:5px 0 0 auto;">0</div></div></div>
+    <div class="mini-card card"><div><div class="nm">Reservoir unit 4</div><div class="sub">Residential · 96m²</div></div>
+      <div style="margin-left:auto; text-align:right;"><div class="num" style="font-size:15px;">$9,240</div>
+      <div class="badge zero" style="width:22px;height:22px;font-size:11px; margin:5px 0 0 auto;">0</div></div></div>
+    <div class="caps muted" style="margin-top:auto; text-align:center; font-size:7.5px;">Private tool · tailnet only</div>
+  </div>
+
+  <div class="main">
+    <div style="display:flex; align-items:center; gap:15px; margin:2px 4px;">
+      <div><div style="font-size:21px; font-weight:700;">Hawthorn — floorworld fitout</div>
+      <div class="sub" style="font-size:9.5px; letter-spacing:.22em; text-indent:.22em; text-transform:uppercase; color:rgba(216,203,182,.72); margin-top:4px;">Commercial · carpet tile + LVT · IFC rev C</div></div>
+      <div style="margin-left:auto; display:flex; gap:10px;">
+        <span class="chip ghost-c" style="height:34px; font-size:12px;">Preview PDF</span>
+        <span class="chip ghost-c" style="height:34px; font-size:12px;">Run sweep</span>
+      </div>
+    </div>
+
+    <div class="hero" style="position:static; height:118px; padding:18px 28px;">
+      <div class="hero-edge"></div>
+      <div style="display:flex; align-items:center; height:100%;">
+        <div><div class="caps" style="font-size:8.5px;">Quote total · ex GST</div>
+        <div style="display:flex; align-items:baseline; gap:18px; margin-top:8px;">
+          <div class="num" style="font-size:46px;">$38,420</div>
+          <div class="sand" style="font-size:12px;">Margin 24% · floor 15% · valid 30 days · 6 line groups</div>
+        </div></div>
+        <div style="margin-left:auto; display:flex; align-items:center; gap:14px;">
+          <div class="badge hot" style="width:52px;height:52px;font-size:23px;">1</div>
+          <div><div class="caps" style="font-size:8.5px;">Exposure</div>
+          <div style="font-size:11px; color:#F0916F; margin-top:5px;">1 unflagged</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec" style="margin:4px 4px 0;"><span class="caps" style="font-size:8px;">The spine</span><span class="line"></span>
+      <span class="caps" style="font-size:7.5px;">Qty</span><span style="width:74px"></span>
+      <span class="caps" style="font-size:7.5px;">Rate</span><span style="width:74px"></span>
+      <span class="caps" style="font-size:7.5px;">Amount</span><span style="width:96px"></span></div>
+<div class="mrow card" style="border-radius:14px;">
+      <div class="tile" style="width:34px;height:34px;border-radius:10px;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#D9A94F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V4.8h6V7"/><path d="M6.2 7l1 13h9.6l1-13"/></svg></div>
+      <div><div class="nm">Demo &amp; make-safe</div><div class="sub">Strip-out · disposal</div></div>
+      <div class="col">1 lot</div><div class="col">$2,150</div>
+      <div class="amt2">$2,150</div></div><div class="mrow card" style="border-radius:14px;">
+      <div class="tile" style="width:34px;height:34px;border-radius:10px;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#D9A94F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l8 4-8 4-8-4z"/><path d="M4 12l8 4 8-4"/><path d="M4 16.6l8 4 8-4"/></svg></div>
+      <div><div class="nm">Prep &amp; substrate</div><div class="sub">Screed · moisture barrier</div></div>
+      <div class="col">420 m²</div><div class="col">$18.79</div>
+      <div class="amt2">$7,890</div></div><div class="mrow card" style="border-radius:14px;">
+      <div class="tile" style="width:34px;height:34px;border-radius:10px;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#D9A94F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg></div>
+      <div><div class="nm">Install</div><div class="sub">Carpet tile + LVT</div></div>
+      <div class="col">420 m²</div><div class="col">$50.81</div>
+      <div class="amt2">$21,340</div></div><div class="mrow card" style="border-radius:14px; border-color:rgba(240,145,111,.45);">
+      <div class="tile" style="width:34px;height:34px;border-radius:10px;border-color:rgba(240,145,111,.5);"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#F0916F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8.2-8 9-4.5-.8-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div>
+      <div><div class="nm">Compliance<span class="pill warn" style="margin-left:6px;"><i></i>Flagged</span></div><div class="sub">Slip rating AS 4586</div></div>
+      <div class="col">—</div><div class="col">—</div>
+      <div class="amt2" style="color:#F0916F;">⚑</div></div><div class="mrow card" style="border-radius:14px;">
+      <div class="tile" style="width:34px;height:34px;border-radius:10px;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#D9A94F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 12h6"/><path d="M9.5 15.5h6"/></svg></div>
+      <div><div class="nm">Commercial</div><div class="sub">Variations · retention · prelims</div></div>
+      <div class="col">1 lot</div><div class="col">$5,600</div>
+      <div class="amt2">$5,600</div></div><div class="mrow card" style="border-radius:14px;">
+      <div class="tile" style="width:34px;height:34px;border-radius:10px;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#D9A94F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 3.5V8h-4.5"/></svg></div>
+      <div><div class="nm">After handover</div><div class="sub">Warranty inspection clause</div></div>
+      <div class="col">1 lot</div><div class="col">$1,440</div>
+      <div class="amt2">$1,440</div></div>
+    <div class="exc" style="position:static;">
+      <div style="display:flex; align-items:center; gap:13px;">
+        <div class="tile" style="width:34px;height:34px;border-radius:10px;border-color:rgba(240,145,111,.5);"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#F0916F" stroke-width="1.7" stroke-linecap="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4.5"/><path d="M12 17.2v.3"/></svg></div>
+        <div style="font-size:14.5px; font-weight:600;">Wet area on L2 — no waterproofing exclusion in the spec</div>
+        <div style="margin-left:auto; display:flex; gap:10px;">
+          <span class="chip brass-c" style="height:34px; font-size:12px;">Append clause</span>
+          <span class="chip ghost-c" style="height:34px; font-size:12px;">Dismiss — I know</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gatep">
+    <div class="card" style="padding:18px 20px;">
+      <div class="caps" style="font-size:8.5px;">Before it goes</div>
+      <div style="margin-top:12px; display:flex; flex-direction:column; gap:10px;">
+        <div class="check-row" style="height:48px; padding:0; gap:11px;">
+          <div class="tile" style="width:32px;height:32px;border-radius:10px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#D9A94F" stroke-width="1.8" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg></div>
+          <div><div class="nm" style="font-size:13.5px;">Total</div></div>
+          <div style="margin-left:auto;"><span class="pill ok"><i></i>Clear</span></div>
+        </div>
+        <div class="check-row" style="height:48px; padding:0; gap:11px;">
+          <div class="tile" style="width:32px;height:32px;border-radius:10px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#D9A94F" stroke-width="1.8" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg></div>
+          <div><div class="nm" style="font-size:13.5px;">Margin 24%</div></div>
+          <div style="margin-left:auto;"><span class="pill ok"><i></i>Clear</span></div>
+        </div>
+        <div class="check-row" style="height:48px; padding:0; gap:11px;">
+          <div class="tile" style="width:32px;height:32px;border-radius:10px;border-color:rgba(240,145,111,.5);"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#F0916F" stroke-width="1.8" stroke-linecap="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4.5"/><path d="M12 17.2v.3"/></svg></div>
+          <div><div class="nm" style="font-size:13.5px;">Exposure</div></div>
+          <div style="margin-left:auto;"><span class="pill warn"><i></i>1 open</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="exc" style="position:static; padding:18px 20px 18px 24px;">
+      <div class="caps" style="font-size:8px; color:#F0916F;">The catch</div>
+      <div style="font-size:14.5px; font-weight:600; line-height:1.45; margin-top:9px;">Moisture mitigation missing — 240m² new slab, RH 87%</div>
+      <div style="font-size:12px; color:#E8DFCF; margin:9px 0 0; line-height:1.55;">Epoxy barrier at $13/m². Either it's priced or it's yours to eat.</div>
+      <div style="margin-top:13px; display:flex; gap:9px;">
+        <span class="chip brass-c" style="height:34px; font-size:12px;">+ Add $3,120 line</span>
+        <span class="chip ghost-c" style="height:34px; font-size:12px;">Send anyway</span>
+      </div>
+    </div>
+
+    <div class="btn" style="position:static; width:100%; height:58px; font-size:14px;">Hold to send</div>
+    <div class="caps" style="text-align:center; font-size:7.5px;">Goes out only on your word</div>
+
+    <div class="card" style="padding:16px 20px; margin-top:2px;">
+      <div class="caps" style="font-size:8px;">This week</div>
+      <div style="display:flex; gap:18px; margin-top:10px;">
+        <div><div class="num" style="font-size:19px;">$62,640</div><div class="caps" style="font-size:7px; margin-top:5px;">Quoted</div></div>
+        <div><div class="num" style="font-size:19px;">$9,240</div><div class="caps" style="font-size:7px; margin-top:5px;">Sent</div></div>
+        <div><div class="num brass" style="font-size:19px;">3</div><div class="caps" style="font-size:7px; margin-top:5px;">Flags caught</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="vignette"></div><div class="grain"></div>
+</body></html>

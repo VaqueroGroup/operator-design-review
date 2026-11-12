@@ -1,0 +1,75 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1680px; height:1000px; overflow:hidden; }
+body { background:#0A0908; font-family:'Inter',sans-serif; color:#F3EDE3; -webkit-font-smoothing:antialiased; position:relative; }
+.beam { position:absolute; inset:0; pointer-events:none; background:
+  radial-gradient(70% 90% at 78% 16%, rgba(255,214,150,.085) 0%, rgba(255,210,145,.03) 42%, transparent 72%),
+  radial-gradient(160% 140% at 74% 8%, transparent 32%, rgba(0,0,0,.42) 72%, rgba(0,0,0,.72) 100%); }
+.grain { position:absolute; inset:0; opacity:.035; mix-blend-mode:overlay; pointer-events:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.halo { position:absolute; right:70px; top:150px; width:640px; height:560px; border-radius:50%; filter:blur(60px); pointer-events:none;
+  background:radial-gradient(closest-side, rgba(255,222,168,.15), rgba(255,214,150,.045) 55%, transparent 78%); }
+.timeline { position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, rgba(166,124,46,.7), rgba(166,124,46,.25)); }
+.eyebrow { font-size:12px; font-weight:500; letter-spacing:.34em; text-transform:uppercase; color:rgba(243,237,227,.30); }
+h1 { font-family:'Bitter',serif; font-weight:800; font-size:46px; line-height:1.05; letter-spacing:-.025em; margin-top:16px;
+  background:linear-gradient(180deg, #F8F3E9 8%, #AFA697 92%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+
+.flow { position:absolute; left:80px; top:230px; width:760px; }
+.step { display:flex; align-items:baseline; gap:20px; padding:13px 0; position:relative; }
+.step .no { font-family:'Bitter',serif; font-weight:800; font-size:15px; color:rgba(243,237,227,.28); width:30px; font-variant-numeric:tabular-nums; }
+.step .nm { font-size:19px; font-weight:300; color:rgba(243,237,227,.78); letter-spacing:-.005em; }
+.step .who { margin-left:auto; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:rgba(243,237,227,.3); }
+.step.you .nm { color:#F2EDE3; font-weight:400; }
+.step.you .who { color:#C9A058; }
+.step.you::before { content:''; position:absolute; left:-18px; top:14px; bottom:14px; width:2px; background:#A67C2E; border-radius:1px; box-shadow:0 0 10px rgba(166,124,46,.5); }
+.step.new .nm::after { content:'NEW'; font-family:'Inter',sans-serif; font-size:10px; letter-spacing:.22em; color:#D08166; margin-left:12px; vertical-align:middle; }
+.step::after { content:''; position:absolute; left:30px; right:80px; bottom:0; height:1px; background:linear-gradient(90deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); }
+.step.leak .nm { color:#D08166; }
+.step .note { font-size:12px; color:rgba(243,237,227,.32); width:100%; margin:2px 0 0 50px; }
+
+.monument { position:absolute; right:96px; top:250px; width:520px; text-align:right; }
+.monument .figure { font-family:'Bitter',serif; font-weight:800; font-size:110px; line-height:.95; letter-spacing:-.035em;
+  background:linear-gradient(175deg, #F2C982 6%, #D9A94F 42%, #A67C2E 88%); -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 10px 32px rgba(166,124,46,.22)); }
+.monument .caption { font-size:15px; color:rgba(243,237,227,.4); margin-top:24px; line-height:1.8; font-weight:300; }
+.monument .caption b { color:rgba(243,237,227,.72); font-weight:500; }
+.warnbox { margin-top:44px; padding:22px 26px; border-radius:8px; text-align:left; position:relative;
+  background:linear-gradient(150deg, rgba(150,60,45,.16), rgba(150,60,45,.05)); }
+.warnbox .t { font-size:16px; font-weight:500; color:#D08166; letter-spacing:-.005em; }
+.warnbox .d { font-size:13px; color:rgba(243,237,227,.5); margin-top:8px; line-height:1.65; font-weight:300; }
+</style></head><body>
+<div class="beam"></div><div class="halo"></div>
+<div class="timeline"></div>
+
+<div style="position:absolute; left:80px; top:64px;">
+  <div class="eyebrow">Meridian — the whole job</div>
+  <h1>Tender to bank.<br>Three moments need you.</h1>
+</div>
+
+<div class="flow">
+  <div class="step"><span class="no">01</span><span class="nm">Tender lands — parsed into draft lines</span><span class="who">Machine</span></div>
+  <div class="step you"><span class="no">02</span><span class="nm">Qualify — bid or no-bid, 90 seconds</span><span class="who">You</span></div>
+  <div class="step"><span class="no">03</span><span class="nm">Price — library + your history, gaps lit</span><span class="who">Machine</span></div>
+  <div class="step you"><span class="no">04</span><span class="nm">Gaps &amp; margin — you close the numbers</span><span class="who">You</span></div>
+  <div class="step new"><span class="no">05</span><span class="nm">Measure state — every quantity says MEASURED or TAKEOFF</span><span class="who">Machine</span><span class="note">Armour auto-writes: subject to site measure, levelling if required, latent conditions</span></div>
+  <div class="step"><span class="no">06</span><span class="nm">Sweep — scope gaps found, exclusions written</span><span class="who">Machine</span></div>
+  <div class="step you"><span class="no">07</span><span class="nm">Send — hold to send, exposure zero</span><span class="who">You</span></div>
+  <div class="step new"><span class="no">08</span><span class="nm">Accept — deposit, signed, prices re-checked</span><span class="who">Machine</span><span class="note">Signature + deposit in one motion; supplier prices validated against the quote's window</span></div>
+  <div class="step new leak"><span class="no">09</span><span class="nm">Vary — every change priced &amp; signed before the work</span><span class="who">Machine</span><span class="note">The biggest leak in the trade, plugged: same rates, same gate, your thumb on glass</span></div>
+  <div class="step"><span class="no">10</span><span class="nm">Claim &amp; chase — progress claims, retention, SOPA dates</span><span class="who">Machine</span></div>
+  <div class="step"><span class="no">11</span><span class="nm">Learn — actuals feed the rates, wins tune the rules</span><span class="who">Machine</span></div>
+</div>
+
+<div class="monument">
+  <div class="eyebrow" style="letter-spacing:.3em;">Where your hours go</div>
+  <div class="figure" style="margin-top:18px;">3</div>
+  <div class="caption">Qualify. Gaps. Send.<br>Everything between and after is the machine.<br><b>Eleven steps, three of them yours.</b></div>
+  <div class="warnbox">
+    <div class="t">Step 09 is the one that pays for the rest</div>
+    <div class="d">Unquoted work performed leaks more money than slow payment and lost tenders combined. The variation gets the same gravity as the original quote — priced, gated, signed in the hallway.</div>
+  </div>
+</div>
+
+<div class="grain"></div>
+</body></html>

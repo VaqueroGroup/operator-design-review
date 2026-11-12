@@ -1,121 +1,148 @@
-<!DOCTYPE html><html><head><meta charset="utf-8">
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-html,body { width:100%; height:100%; overflow:hidden; }
-body { background:#0A0908; font-family:'Inter',sans-serif; color:#F3EDE3; -webkit-font-smoothing:antialiased; position:relative; min-width:1200px; min-height:800px; }
-.beam { position:absolute; inset:0; pointer-events:none; background:
-  radial-gradient(70% 90% at 78% 16%, rgba(255,214,150,.085) 0%, rgba(255,210,145,.03) 42%, transparent 72%),
-  radial-gradient(160% 140% at 74% 8%, transparent 32%, rgba(0,0,0,.42) 72%, rgba(0,0,0,.72) 100%); }
-.grain { position:absolute; inset:0; opacity:.035; mix-blend-mode:overlay; pointer-events:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E"); }
-.halo { position:absolute; right:70px; top:110px; width:640px; height:520px; border-radius:50%; filter:blur(60px); pointer-events:none;
-  background:radial-gradient(closest-side, rgba(255,222,168,.15), rgba(255,214,150,.045) 55%, transparent 78%); }
-.timeline { position:absolute; top:0; left:0; right:0; height:3px; display:flex; z-index:5; }
+html,body { min-height:100%; }
+body { background:#0A0908; font-family:'Inter',sans-serif; color:#F3EDE3; -webkit-font-smoothing:antialiased; position:relative; }
+.beam { position:fixed; inset:0; pointer-events:none; background:
+  radial-gradient(80% 60% at 80% 10%, rgba(255,214,150,.10) 0%, rgba(255,210,145,.035) 45%, transparent 72%),
+  radial-gradient(160% 130% at 70% 0%, transparent 30%, rgba(0,0,0,.45) 75%, rgba(0,0,0,.72) 100%); }
+.grain { position:fixed; inset:0; opacity:.035; mix-blend-mode:overlay; pointer-events:none; z-index:40; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.timeline { position:fixed; top:0; left:0; right:0; height:3px; display:flex; z-index:50; }
 .timeline i { flex:1; background:rgba(255,255,255,.05); transition:background .6s; }
 .timeline i.done { background:linear-gradient(90deg, rgba(166,124,46,.75), rgba(166,124,46,.45)); }
 .timeline i.now { background:linear-gradient(90deg, #C9A058, #8F6926); box-shadow:0 0 18px rgba(201,160,88,.6); }
-.eyebrow { font-size:12px; font-weight:500; letter-spacing:.34em; text-transform:uppercase; color:rgba(243,237,227,.30); }
-h1 { font-family:'Bitter',serif; font-weight:800; font-size:42px; line-height:1.05; letter-spacing:-.025em; margin-top:14px;
+.eyebrow { font-size:11px; font-weight:500; letter-spacing:.32em; text-transform:uppercase; color:rgba(243,237,227,.30); }
+h1 { font-family:'Bitter',serif; font-weight:800; letter-spacing:-.025em; line-height:1.06; margin-top:12px;
   background:linear-gradient(180deg, #F8F3E9 8%, #AFA697 92%); -webkit-background-clip:text; background-clip:text; color:transparent; }
-.head { position:absolute; left:80px; top:56px; }
-.doc { position:absolute; left:80px; top:238px; width:640px; }
-.specline { display:flex; align-items:baseline; gap:22px; padding:15px 0; position:relative; }
-.specline .idx { font-size:13px; color:rgba(243,237,227,.22); font-variant-numeric:tabular-nums; width:26px; }
-.specline .txt { font-size:19px; font-weight:300; color:rgba(243,237,227,.8); letter-spacing:-.005em; }
-.specline .amt { margin-left:auto; font-size:16px; color:rgba(243,237,227,.5); font-variant-numeric:tabular-nums; }
-.specline::after { content:''; position:absolute; left:48px; right:60px; bottom:6px; height:1px; background:linear-gradient(90deg, rgba(166,124,46,.4), rgba(166,124,46,.05)); }
+.figure { font-family:'Bitter',serif; font-weight:800; letter-spacing:-.035em; font-variant-numeric:tabular-nums;
+  background:linear-gradient(175deg, #F2C982 6%, #D9A94F 42%, #A67C2E 88%); -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 10px 32px rgba(166,124,46,.22)); transition:filter .4s; }
+.figure.flash { filter:drop-shadow(0 10px 44px rgba(242,201,130,.5)); }
+.caption { color:rgba(243,237,227,.42); line-height:1.75; font-weight:300; }
+.caption b { color:rgba(243,237,227,.75); font-weight:500; }
+.specline { display:flex; align-items:baseline; gap:16px; padding:15px 0; position:relative; }
+.specline .idx { font-size:12px; color:rgba(243,237,227,.22); font-variant-numeric:tabular-nums; width:24px; }
+.specline .txt { font-weight:300; color:rgba(243,237,227,.8); letter-spacing:-.005em; }
+.specline .amt { margin-left:auto; color:rgba(243,237,227,.5); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.specline::after { content:''; position:absolute; left:40px; right:0; bottom:4px; height:1px; background:linear-gradient(90deg, rgba(166,124,46,.4), rgba(166,124,46,.05)); }
 .specline.gap .txt, .specline.gap .amt { color:#D08166; }
 .specline.gap::after { background:linear-gradient(90deg, rgba(208,129,102,.7), rgba(208,129,102,.1)); }
 .specline.priced-now { animation:lightup .9s ease; }
 @keyframes lightup { 0% { background:rgba(201,160,88,.18); } 100% { background:transparent; } }
-.ember { display:inline-block; width:9px; height:9px; border-radius:50%; background:#FF6B35; box-shadow:0 0 24px 7px rgba(255,107,53,.3); margin-right:14px; vertical-align:middle; transition:all .5s; }
+.ember { display:inline-block; width:9px; height:9px; border-radius:50%; background:#FF6B35; box-shadow:0 0 24px 7px rgba(255,107,53,.3); margin-right:10px; vertical-align:middle; transition:all .5s; }
 .ember.out { background:rgba(255,107,53,0); box-shadow:none; }
-.pbtn { margin-left:22px; border:1px solid rgba(243,237,227,.28); background:transparent; color:#EDE6D8; font-family:'Inter',sans-serif;
-  font-size:13px; padding:6px 16px; border-radius:5px; cursor:pointer; transition:all .18s; }
-.pbtn:hover { border-color:#C9A058; color:#F2C982; box-shadow:0 0 18px rgba(201,160,88,.25); }
-.monument { position:absolute; right:96px; top:190px; width:520px; text-align:right; }
-.monument .figure { font-family:'Bitter',serif; font-weight:800; font-size:104px; line-height:.95; letter-spacing:-.035em; font-variant-numeric:tabular-nums;
-  background:linear-gradient(175deg, #F2C982 6%, #D9A94F 42%, #A67C2E 88%); -webkit-background-clip:text; background-clip:text; color:transparent;
-  filter:drop-shadow(0 10px 32px rgba(166,124,46,.22)); transition:filter .4s; }
-.monument .figure.flash { filter:drop-shadow(0 10px 44px rgba(242,201,130,.5)); }
-.monument .caption { font-size:15px; color:rgba(243,237,227,.4); margin-top:22px; line-height:1.8; font-weight:300; }
-.monument .caption b { color:rgba(243,237,227,.72); font-weight:500; }
-.action { position:absolute; right:96px; bottom:110px; width:430px; }
-.btn { height:66px; border-radius:8px; background:linear-gradient(180deg, #C9A058 0%, #A67C2E 55%, #8F6926 100%); color:#14100A;
-  font-family:'Inter',sans-serif; font-size:17px; font-weight:500; display:flex; align-items:center; justify-content:center; cursor:pointer; position:relative; overflow:hidden;
-  box-shadow:0 18px 48px rgba(166,124,46,.26), inset 0 1px 0 rgba(255,238,200,.5); user-select:none; }
+.pbtn { margin-left:14px; border:1px solid rgba(243,237,227,.28); background:transparent; color:#EDE6D8; font-family:'Inter',sans-serif;
+  font-size:13px; padding:8px 16px; border-radius:5px; cursor:pointer; transition:all .18s; flex-shrink:0; }
+.pbtn:hover { border-color:#C9A058; color:#F2C982; }
+.btn { height:62px; border-radius:8px; background:linear-gradient(180deg, #C9A058 0%, #A67C2E 55%, #8F6926 100%); color:#14100A;
+  font-family:'Inter',sans-serif; font-size:16px; font-weight:500; display:flex; align-items:center; justify-content:center; cursor:pointer; position:relative; overflow:hidden;
+  box-shadow:0 18px 48px rgba(166,124,46,.26), inset 0 1px 0 rgba(255,238,200,.5); user-select:none; width:100%; }
 .btn.ghost { background:transparent; color:#EDE6D8; border:1px solid rgba(243,237,227,.28); box-shadow:none; }
-.btn.ghost:hover { border-color:#C9A058; }
 .btn .fill { position:absolute; left:0; top:0; bottom:0; width:0; background:rgba(20,16,10,.22); pointer-events:none; }
 .btn .lbl { position:relative; z-index:2; }
-.action .note { font-size:13px; color:rgba(243,237,227,.3); text-align:center; margin-top:16px; }
-.flagcard { border-radius:8px; padding:18px 22px; margin-bottom:12px; background:linear-gradient(150deg, rgba(150,60,45,.14), rgba(150,60,45,.04)); text-align:left; }
-.flagcard .t { font-size:15px; font-weight:500; color:#D08166; }
+.note { font-size:12.5px; color:rgba(243,237,227,.32); text-align:center; margin-top:14px; line-height:1.6; }
+.flagcard { border-radius:8px; padding:18px 20px; margin-bottom:12px; background:linear-gradient(150deg, rgba(150,60,45,.14), rgba(150,60,45,.04)); }
+.flagcard .t { font-size:14.5px; font-weight:500; color:#D08166; }
 .flagcard .d { font-size:12.5px; color:rgba(243,237,227,.45); margin-top:6px; line-height:1.6; }
 .flagcard .acts { margin-top:12px; display:flex; gap:10px; }
-.fbtn { border:1px solid rgba(243,237,227,.25); background:transparent; color:#EDE6D8; font-family:'Inter',sans-serif; font-size:12.5px; padding:6px 14px; border-radius:5px; cursor:pointer; }
+.fbtn { border:1px solid rgba(243,237,227,.25); background:transparent; color:#EDE6D8; font-family:'Inter',sans-serif; font-size:12.5px; padding:8px 14px; border-radius:5px; cursor:pointer; }
 .fbtn.acc { border-color:#C9A058; color:#F2C982; }
 .fbtn.done { opacity:.35; pointer-events:none; }
-.footer { position:absolute; left:80px; bottom:56px; display:flex; align-items:center; gap:26px; }
+.sent-overlay { position:fixed; inset:0; display:none; align-items:center; justify-content:center; flex-direction:column; background:rgba(10,9,8,.92); z-index:60; text-align:center; padding:32px; }
+.sent-overlay.show { display:flex; }
+.sent-overlay .big { font-family:'Bitter',serif; font-weight:800; font-size:44px; letter-spacing:-.02em;
+  background:linear-gradient(175deg, #F2C982, #A67C2E); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.sent-overlay .sub { font-size:15px; color:rgba(243,237,227,.5); margin-top:16px; font-weight:300; line-height:1.7; }
+
+/* ---- DESKTOP (default): editorial two-column ---- */
+.wrap { max-width:1680px; margin:0 auto; padding:56px 80px 120px; position:relative; }
+.head { margin-bottom:44px; }
+h1 { font-size:42px; }
+.grid { display:flex; gap:60px; align-items:flex-start; }
+.col-doc { flex:1.15; min-width:0; }
+.col-money { flex:.85; min-width:0; text-align:right; position:sticky; top:56px; }
+.figure { font-size:104px; line-height:.95; }
+.caption { font-size:15px; margin-top:22px; }
+.specline .txt { font-size:19px; }
+.specline .amt { font-size:16px; }
+.action { margin-top:40px; margin-left:auto; max-width:430px; }
+.footer { margin-top:56px; display:flex; gap:26px; }
 .footer .step { font-size:13px; color:rgba(243,237,227,.26); }
 .footer .step b { color:rgba(243,237,227,.66); font-weight:500; }
-.sent-overlay { position:absolute; inset:0; display:none; align-items:center; justify-content:center; flex-direction:column; background:rgba(10,9,8,.88); z-index:20; }
-.sent-overlay.show { display:flex; }
-.sent-overlay .big { font-family:'Bitter',serif; font-weight:800; font-size:56px; letter-spacing:-.02em;
-  background:linear-gradient(175deg, #F2C982, #A67C2E); -webkit-background-clip:text; background-clip:text; color:transparent; }
-.sent-overlay .sub { font-size:16px; color:rgba(243,237,227,.5); margin-top:18px; font-weight:300; }
+
+/* ---- MOBILE: stacked, thumb-first ---- */
+@media (max-width:820px) {
+  .wrap { padding:36px 22px calc(140px + env(safe-area-inset-bottom)); }
+  h1 { font-size:30px; }
+  .head { margin-bottom:30px; }
+  .grid { flex-direction:column; gap:34px; }
+  .col-money { text-align:left; position:static; order:-1; }
+  .figure { font-size:64px; }
+  .caption { font-size:14px; margin-top:14px; }
+  .specline { padding:16px 0; gap:12px; }
+  .specline .txt { font-size:16px; }
+  .specline .amt { font-size:15px; }
+  .pbtn { padding:10px 18px; }
+  .action { position:fixed; left:22px; right:22px; bottom:calc(18px + env(safe-area-inset-bottom)); max-width:none; margin:0; z-index:30; }
+  .action .note { display:none; }
+  .footer { display:none; }
+}
 </style></head><body>
-<div class="beam"></div><div class="halo"></div>
+<div class="beam"></div>
 <div class="timeline"><i class="done"></i><i class="now"></i><i></i><i></i></div>
 
-<div class="head">
-  <div class="eyebrow">Meridian — live demo</div>
-  <h1 id="h1">Price what's missing.</h1>
-</div>
+<div class="wrap">
+  <div class="head">
+    <div class="eyebrow">Meridian — live demo</div>
+    <h1 id="h1">Price what's missing.</h1>
+  </div>
 
-<div class="doc" id="doc">
-  <div class="specline"><span class="idx">01</span><span class="txt">Carpet tile — direct stick, class 33</span><span class="amt">$14,016</span></div>
-  <div class="specline"><span class="idx">02</span><span class="txt">Sheet vinyl 2mm — welded, coved</span><span class="amt">$12,816</span></div>
-  <div class="specline"><span class="idx">03</span><span class="txt">Substrate prep — feather finish</span><span class="amt">$7,890</span></div>
-  <div class="specline gap" id="gap1"><span class="idx">08</span><span class="txt"><span class="ember" id="em1"></span>Wet area membrane — AS 3740 tanking</span><span class="amt" id="amt1">unpriced</span><button class="pbtn" id="b1" onclick="priceGap(1)">Price it</button></div>
-  <div class="specline gap" id="gap2"><span class="idx">09</span><span class="txt"><span class="ember" id="em2"></span>Epoxy moisture barrier — slab RH &gt;75%</span><span class="amt" id="amt2">unpriced</span><button class="pbtn" id="b2" onclick="priceGap(2)">Price it</button></div>
-</div>
+  <div class="grid">
+    <div class="col-money">
+      <div class="eyebrow" style="letter-spacing:.3em;">Quote total · ex GST</div>
+      <div class="figure" id="total" style="margin-top:12px;">$38,420</div>
+      <div class="caption" id="cap">Margin <b>24%</b> · two lines waiting on you.<br>Both prices proposed from your Carlton job, Mar 2023.</div>
+    </div>
 
-<div class="monument">
-  <div class="eyebrow" style="letter-spacing:.3em;">Quote total · ex GST</div>
-  <div class="figure" id="total">$38,420</div>
-  <div class="caption" id="cap">Margin <b>24%</b> · two lines waiting on you.<br>Both prices proposed from your Carlton job, Mar 2023.</div>
-</div>
+    <div class="col-doc" id="doc">
+      <div class="specline"><span class="idx">01</span><span class="txt">Carpet tile — direct stick, class 33</span><span class="amt">$14,016</span></div>
+      <div class="specline"><span class="idx">02</span><span class="txt">Sheet vinyl 2mm — welded, coved</span><span class="amt">$12,816</span></div>
+      <div class="specline"><span class="idx">03</span><span class="txt">Substrate prep — feather finish</span><span class="amt">$7,890</span></div>
+      <div class="specline gap" id="gap1"><span class="idx">08</span><span class="txt"><span class="ember" id="em1"></span>Wet area membrane — AS 3740 tanking</span><span class="amt" id="amt1">unpriced</span><button class="pbtn" id="b1" onclick="priceGap(1)">Price it</button></div>
+      <div class="specline gap" id="gap2"><span class="idx">09</span><span class="txt"><span class="ember" id="em2"></span>Epoxy moisture barrier — slab RH &gt;75%</span><span class="amt" id="amt2">unpriced</span><button class="pbtn" id="b2" onclick="priceGap(2)">Price it</button></div>
+    </div>
+  </div>
 
-<div class="action" id="action">
-  <div class="btn ghost" id="mainbtn" onclick="mainAction()"><div class="fill" id="fill"></div><span class="lbl" id="mainlbl">Price both gaps →</span></div>
-  <div class="note" id="note">The demo: price the gaps, run the sweep, then hold to send.</div>
-</div>
+  <div class="action" id="action">
+    <div class="btn ghost" id="mainbtn" onclick="mainAction()"><div class="fill" id="fill"></div><span class="lbl" id="mainlbl">Price both gaps →</span></div>
+    <div class="note" id="note">Price the gaps, run the sweep, then hold to send.</div>
+  </div>
 
-<div class="footer">
-  <div class="step" id="f1"><b>1 Drop ✓</b></div>
-  <div class="step" id="f2"><b>2 Price</b></div>
-  <div class="step" id="f3">3 Sweep</div>
-  <div class="step" id="f4">4 Send</div>
+  <div class="footer">
+    <div class="step"><b>1 Drop ✓</b></div>
+    <div class="step"><b>2 Price</b></div>
+    <div class="step">3 Sweep</div>
+    <div class="step">4 Send</div>
+  </div>
 </div>
 
 <div class="sent-overlay" id="sentOverlay">
   <div class="big">Quote sent.</div>
   <div class="sub">$49,100 to Hawthorn Floorworld — every gap priced, every flag answered.</div>
-  <div class="btn ghost" style="width:220px; margin-top:36px;" onclick="resetDemo()"><span class="lbl">Run it again</span></div>
+  <div class="btn ghost" style="width:220px; margin-top:32px;" onclick="resetDemo()"><span class="lbl">Run it again</span></div>
 </div>
 
 <script>
-const S = { g1:false, g2:false, phase:'price', swept:false };
+const S = { g1:false, g2:false, phase:'price' };
 const fmt = n => '$' + n.toLocaleString('en-AU');
 function totalNow() { return 38420 + (S.g1?7560:0) + (S.g2?3120:0); }
 function render() {
   const t = document.getElementById('total');
   t.textContent = fmt(totalNow());
   t.classList.add('flash'); setTimeout(()=>t.classList.remove('flash'), 450);
-  const cap = document.getElementById('cap');
   const waiting = (S.g1?0:1)+(S.g2?0:1);
-  if (S.phase === 'price') cap.innerHTML = waiting
+  document.getElementById('cap').innerHTML = (S.phase==='price' && waiting)
     ? 'Margin <b>24%</b> · ' + waiting + ' line' + (waiting>1?'s':'') + ' waiting on you.<br>Both prices proposed from your Carlton job, Mar 2023.'
     : 'Margin <b>24%</b> · every line priced.<br>Ready for the sweep.';
 }
@@ -130,57 +157,44 @@ function priceGap(n) {
   document.getElementById('em'+n).classList.add('out');
   document.getElementById('b'+n).remove();
   render();
-  if (S.g1 && S.g2) { document.getElementById('mainlbl').textContent = 'Run the sweep →'; }
 }
 function mainAction() {
-  if (S.phase === 'price') {
-    priceGap(1); priceGap(2);
-    S.phase='sweep'; buildSweep();
-  }
+  if (S.phase !== 'price') return;
+  priceGap(1); priceGap(2);
+  S.phase='sweep'; buildSweep();
 }
 function buildSweep() {
   document.getElementById('h1').textContent = 'The sweep found two things.';
-  document.getElementById('f2').innerHTML = '<b>2 Price ✓</b>';
-  document.getElementById('f3').innerHTML = '<b>3 Sweep</b>';
   document.querySelector('.timeline').children[1].className = 'done';
   document.querySelector('.timeline').children[2].className = 'now';
   const a = document.getElementById('action');
   a.innerHTML = `
     <div class="flagcard"><div class="t">Wet area membrane — exclusion drafted</div>
-      <div class="d">Tanking under all sheet vinyl is now priced and included. Warranty inspection clause appended to the quote.</div>
+      <div class="d">Tanking under all sheet vinyl is now priced and included. Warranty inspection clause appended.</div>
       <div class="acts"><button class="fbtn acc" onclick="acceptFlag(this)">Accept clause</button><button class="fbtn">Edit</button></div></div>
     <div class="flagcard"><div class="t">Occupied premises — after-hours allowance</div>
-      <div class="d">Site is a trading clinic. Staging + after-hours rates apply — $2,150 added to the commercial line.</div>
+      <div class="d">Site is a trading clinic. Staging + after-hours rates — $2,150 on the commercial line.</div>
       <div class="acts"><button class="fbtn acc" onclick="acceptFlag(this)">Accept clause</button><button class="fbtn">Edit</button></div></div>
-    <div class="btn" id="mainbtn" onclick="toGate()" style="margin-top:18px;"><div class="fill" id="fill"></div><span class="lbl">Both handled — to the gate</span></div>
-    <div class="note">Exposure drops as you accept. Nothing sends yet.</div>`;
+    <div class="btn" id="mainbtn" onclick="toGate()" style="margin-top:18px;"><div class="fill"></div><span class="lbl">Both handled — to the gate</span></div>`;
 }
 function acceptFlag(b) { b.classList.add('done'); b.textContent = 'Clause accepted'; }
 function toGate() {
   S.phase = 'gate';
   document.getElementById('h1').textContent = 'One gate. Your hand on it.';
-  document.getElementById('f3').innerHTML = '<b>3 Sweep ✓</b>';
-  document.getElementById('f4').innerHTML = '<b>4 Send</b>';
   document.querySelector('.timeline').children[2].className = 'done';
   document.querySelector('.timeline').children[3].className = 'now';
   document.getElementById('action').innerHTML = `
-    <div class="btn" id="holdbtn"><div class="fill" id="fill"></div><span class="lbl" id="mainlbl">Hold to send</span></div>
+    <div class="btn" id="holdbtn"><div class="fill" id="fill"></div><span class="lbl">Hold to send</span></div>
     <div class="note">Press and hold — releases only on your word.</div>`;
   const hb = document.getElementById('holdbtn');
-  let t0 = null, raf;
-  const fill = document.getElementById('fill');
-  const start = e => { e.preventDefault(); t0 = performance.now(); tick(); };
-  const stop = () => { t0 = null; cancelAnimationFrame(raf); fill.style.width = '0'; };
-  function tick() {
-    if (!t0) return;
-    const p = Math.min((performance.now()-t0)/1200, 1);
-    fill.style.width = (p*100)+'%';
-    if (p >= 1) { sent(); return; }
-    raf = requestAnimationFrame(tick);
-  }
+  const fill = hb.querySelector('.fill');
+  let t0=null, raf;
+  const tick = () => { if(!t0) return; const p=Math.min((performance.now()-t0)/1200,1); fill.style.width=(p*100)+'%';
+    if(p>=1){ sent(); return; } raf=requestAnimationFrame(tick); };
+  const start = e => { e.preventDefault(); t0=performance.now(); tick(); };
+  const stop = () => { t0=null; cancelAnimationFrame(raf); fill.style.width='0'; };
   hb.addEventListener('mousedown', start); hb.addEventListener('touchstart', start, {passive:false});
-  window.addEventListener('mouseup', stop); hb.addEventListener('touchend', stop);
-  hb.addEventListener('mouseleave', stop);
+  ['mouseup','touchend','touchcancel','mouseleave'].forEach(ev=>hb.addEventListener(ev, stop));
 }
 function sent() {
   document.getElementById('sentOverlay').classList.add('show');
